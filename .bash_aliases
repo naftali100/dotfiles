@@ -1,0 +1,1 @@
+/home/naftali/.bash_aliases
