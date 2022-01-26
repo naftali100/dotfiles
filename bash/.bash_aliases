@@ -8,12 +8,16 @@ mkdir(){
 #    [ -d "$1" ] && builtin cd "$1" && l
 #}
 
+# create new folder and name it as today date
+# move the files to that folder  
 rm(){
     folder_name=$(date +"%Y-%m-%d %T")
     /bin/mkdir ~/trash/"$folder_name"
     mv "$@" ~/trash/"$folder_name"
 }
 
+# easly commit all changes in folder
+# everything after the command will be the commit message
 commit(){
     echo "add..."
     git add .
@@ -21,6 +25,7 @@ commit(){
     git commit -a -m "$*"
 }
 
+# same as above command and sign the commit
 commits(){
    echo "add..."
     git add .
@@ -35,6 +40,7 @@ alias cd..='cd ..'
 
 alias c="clear"   
 alias cls="clear" 
+
 alias tf='tail -f'
 
 alias ls=exa
@@ -44,7 +50,6 @@ alias lll='exa -Tla'
 
 alias upload="scp"
 alias p="cd ~/Documents/program"
-alias L="cd /home/naftali/Documents/לימודים/שנה ב/מונחה עצמים/"
 alias service="systemctl"
 alias sudo="sudo "
 
