@@ -194,6 +194,8 @@ export PATH="$PATH:$GEM_HOME/bin:/home/naftali/.local/bin"
 
 export EDITOR=nano
 
+# fix for tilix terminal
+# https://gnunn1.github.io/tilix-web/manual/vteconfig/
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
@@ -204,6 +206,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# mcfly: bash history search tool
 source /usr/share/doc/mcfly/mcfly.bash
 
 # disable ctrl-s from freez the terminal
