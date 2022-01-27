@@ -43,7 +43,7 @@ alias lll='exa -Tla'
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
-[[ -f /etc/inputrc ]] && bind -f /etc/inputrc
+# [[ -f /etc/inputrc ]] && bind -f /etc/inputrc
 [[ -f ~/.inputrc ]] && bind -f ~/.inputrc
 
 ################################################################################
