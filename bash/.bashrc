@@ -185,6 +185,7 @@ __   __  ______   _______     _______  ___  ______   ______
 וגם וויל המלך
 EOF
 
+echo "tools_reminder: ranger"
 
 # ==========
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
@@ -192,7 +193,7 @@ export PATH="$PATH:$GEM_HOME/bin:/home/naftali/.local/bin"
 
 # eval $(thefuck --alias f)
 
-export EDITOR=nano
+export EDITOR=vim
 
 # fix for tilix terminal
 # https://gnunn1.github.io/tilix-web/manual/vteconfig/

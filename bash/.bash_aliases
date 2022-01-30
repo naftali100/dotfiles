@@ -12,7 +12,7 @@ mkdir(){
 # move the files to that folder  
 rm(){
     folder_name=$(date +"%Y-%m-%d %T")
-    /bin/mkdir ~/trash/"$folder_name"
+    /bin/mkdir -p ~/trash/"$folder_name"
     mv "$@" ~/trash/"$folder_name"
 }
 
