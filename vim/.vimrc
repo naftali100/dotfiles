@@ -76,3 +76,8 @@ set expandtab
 set termwinsize=12x0   " Set terminal size
 set splitbelow         " Always split below
 set mouse=a            " Enable mouse drag on window splits
+" enable copy from and to vim
+set clipboard=unnamedplus
+
+" make arrow key to change lines
+set whichwrap+=<,>,[,]
