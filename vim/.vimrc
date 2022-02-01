@@ -64,4 +64,15 @@ inoremap <A-Up> <Esc>:m .-2<CR>==gi
 vnoremap <A-Down> :m '>+1<CR>gv=gv
 vnoremap <A-Up> :m '<-2<CR>gv=gv
 
-set mouse=a
+map <C-~> :term<CR>
+
+" How many columns of whitespace a \t is worth
+set tabstop=4 
+" How many columns of whitespace a level of indentation is worth
+set shiftwidth=4 
+" Use spaces when tabbing
+set expandtab
+
+set termwinsize=12x0   " Set terminal size
+set splitbelow         " Always split below
+set mouse=a            " Enable mouse drag on window splits

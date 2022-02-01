@@ -185,7 +185,7 @@ __   __  ______   _______     _______  ___  ______   ______
 וגם וויל המלך
 EOF
 
-echo "tools_reminder: ranger"
+echo "tools_reminder: ranger, rg"
 
 # ==========
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
