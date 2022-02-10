@@ -4,11 +4,57 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+# source ~/.git-propmt.sh
 
-[[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
+_git_ps1(){
+     local git_status="$(git status 2> /dev/null)"
+
+    if [[ ! $git_status =~ "working directory clean" ]]; then
+        echo -e $COLOR_RED
+    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+        echo -e $COLOR_YELLOW
+    elif [[ $git_status =~ "nothing to commit" ]]; then
+        echo -e $COLOR_GREEN
+    else
+        echo -e $COLOR_OCHRE
+    fi
+    
+    local RED="\033[0;31m"
+    local GREEN="\033[0;32m"
+    local NOCOLOR="\033[0m"
+    local YELLOW="\033[0;33m"
+    local BLACK="\033[0;30m"
+    
+    local git_modified_color="\[${GREEN}\]"
+    local git_status=$(git status 2>/dev/null | grep "Your branch is ahead" 2>/dev/null)
+    if [ "$git_status" != "" ]
+    then
+        git_modified_color="\[${YELLOW}\]"
+    fi
+    local git_status=$(git status --porcelain 2>/dev/null)
+    if [ "$git_status" != "" ]
+    then
+        git_modified_color="\[${RED}\]"
+    fi
+    
+    local git_branch=$(git branch --show-current 2>/dev/null)
+    if [ "$git_branch" != "" ];
+    then
+        git_branch="($git_modified_color$git_branch\[${BLACK}\]) "
+    fi
+    PS1="\[${BLACK}\]\u@\h \w $git_branch$\[${NOCOLOR}\] "
+}
 
 _set_my_PS1() {
-    PS1='\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[38;5;123m\]\w\[\e[0m\]\$ '
+    OS_ICON=   # Replace this with your OS icon
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWSTASHSTATE=1
+    export GIT_PS1_SHOWUPSTREAM="auto verbos name git"
+    export GIT_PS1_DESCRIBE_STYLE="branch"
+    export GIT_PS1_SHOWCOLORHINTS=true
+    PS1='\w$(__git_ps1 " (%s)")\$ '
+    # PS1="\n \[\033[0;34m\]╭─────\[\033[0;31m\]\[\033[0;37m\]\[\033[41m\] $OS_ICON \u \[\033[0m\]\[\033[0;31m\]\[\033[0;34m\]─────\[\033[0;32m\]\[\033[0;30m\]\[\033[42m\] \w \[\033[0m\]\[\033[0;32m\] \n \[\033[0;34m\]╰ \[\033[1;36m\]\$ \[\033[0m\]"
+    # PS1='\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[38;5;123m\]\w\[\e[0m\]\$ '
     if [ "$(whoami)" = "liveuser" ] ; then
         local iso_version="$(grep ^VERSION= /usr/lib/endeavouros-release 2>/dev/null | cut -d '=' -f 2)"
         if [ -n "$iso_version" ] ; then
@@ -21,29 +67,10 @@ _set_my_PS1() {
 _set_my_PS1
 unset -f _set_my_PS1
 
-ShowInstallerIsoInfo() {
-    local file=/usr/lib/endeavouros-release
-    if [ -r $file ] ; then
-        cat $file
-    else
-        echo "Sorry, installer ISO info is not available." >&2
-    fi
-}
-
-
-alias ll='ls -laa '   # show long listing of all
-alias l='ls -la '   # show long listing but no hidden dotfiles
-alias lll='exa -Tla'
 [[ "$(whoami)" = "root" ]] && return
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
-## Use the up and down arrow keys for finding a command in history
-## (you can write some initial letters of the command first).
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
-
-# [[ -f /etc/inputrc ]] && bind -f /etc/inputrc
 [[ -f ~/.inputrc ]] && bind -f ~/.inputrc
 
 ################################################################################
@@ -175,7 +202,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-cat <<'EOF'
+more <<'EOF'
 __   __  ______   _______     _______  ___  ______   ______  
 \ \ / / |____  | |_____  |   |____  .||_  ||____  | |____  | 
 |  V /       | |   _   | |        | |   | |     | |      | | 

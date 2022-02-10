@@ -21,6 +21,9 @@ Plugin 'vim-airline/vim-airline'
 " vscode dark theme
 Plugin 'tomasiser/vim-code-dark'
 
+" git support
+Plugin 'tpope/vim-fugitive'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -38,7 +41,7 @@ set guifont=Fira\ Code:h12
 
 " enable dark color theme
 colorscheme codedark
-let g:airline_theme = 'codedark'
+" let g:airline_theme = 'codedark'
 
 map k <Down>
 map j <Up>
@@ -51,11 +54,11 @@ set number
 map <Leader>l :set relativenumber!<CR>
 
 " keep the curser in the center
-augroup VCenterCursor
-  au!
-  au BufEnter,WinEnter,WinNew,VimResized *,*.*
-        \ let &scrolloff=winheight(win_getid())/2
-augroup END
+" augroup VCenterCursor
+"  au!
+"  au BufEnter,WinEnter,WinNew,VimResized *,*.*
+"        \ let &scrolloff=winheight(win_getid())/2
+" augroup END
 
 nnoremap <A-Down> :m .+1<CR>==
 nnoremap <A-Up> :m .-2<CR>==
@@ -81,3 +84,6 @@ set clipboard=unnamedplus
 
 " make arrow key to change lines
 set whichwrap+=<,>,[,]
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!

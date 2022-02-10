@@ -1,5 +1,9 @@
 $include /etc/inputrc
 
+## Use the up and down arrow keys for finding a command in history
+#bind '"\e[A":history-search-backward'
+#bind '"\e[B":history-search-forward'
+
 "\e[3;5~": shell-kill-word
 
 # Ctrl-Backspace

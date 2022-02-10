@@ -1,22 +1,24 @@
-alias ser="sudo wg-quick up wg0 || ssh n"
+alias ser="sudo wg-quick up wg0; ssh n"
 
 mkdir(){
-        /bin/mkdir -pv "$1" && cd "$1"
+    /bin/mkdir -pv "$1" && cd "$1"
 }
 
+# cd only if exsist and list files 
 #cd(){
-#    [ -d "$1" ] && builtin cd "$1" && l
+#    [ -d "$1" ] && builtin cd "$1" && ls
 #}
 
 # create new folder and name it as today date
 # move the files to that folder  
 rm(){
-    folder_name=$(date +"%Y-%m-%d %T")
+    # folder_name="$(date +"%Y-%m-%d %T") $(pwd)"
+    folder_name="$(date +"%Y-%m-%d %T")"
     /bin/mkdir -p ~/trash/"$folder_name"
     mv "$@" ~/trash/"$folder_name"
 }
 
-# easly commit all changes in folder
+# easily commit all changes in folder
 # everything after the command will be the commit message
 commit(){
     echo "add..."
@@ -32,26 +34,6 @@ commits(){
     echo "commit..."
     git commit -S11C0F30B96D4CBFE -a -m "$*"
 }
-
-alias ty=yt
-alias dc=cd
-alias ..='cd ..'
-alias cd..='cd ..'
-
-alias c="clear"   
-alias cls="clear" 
-
-alias tf='tail -f'
-
-alias ls=exa
-alias l='ls -la '   # show long listing but no hidden dotfiles
-alias ll='ls -laa '   # show long listing of all
-alias lll='exa -Tla'
-
-alias upload="scp"
-alias p="cd ~/Documents/program"
-alias service="systemctl"
-alias sudo="sudo "
 
 run(){
     one=$1
@@ -72,6 +54,33 @@ killport () {
     fi
 }
 
+##########
+# programs alises
+##########
+
+# youtube-dl
+alias ty=yt
+
+# cd mistakes
+alias dc=cd
+alias ..='cd ..'
+alias cd..='cd ..'
+
+alias c="clear"   
+alias cls="clear" 
+
+alias tf='tail -f'
+
+alias ls=ranger
+alias exa='exa --icons'
+alias l='exa -la'   # show long listing
+alias lll='exa -Tla' # show tree of all files
+
+alias upload="scp"
+alias p="cd ~/Documents/program"
+alias service="systemctl"
+alias sudo="sudo "
+
 alias msfconsole="msfconsole --quiet -x \"db_connect ${USER}@msf\""
 
 alias gg=ungit
@@ -81,7 +90,6 @@ alias htop="btop"
 
 alias qr=qrencode
 
-#alias off="shutdown now"
 alias off="qdbus org.kde.Shutdown /Shutdown logoutAndShutdown"
 alias reboot="qdbus org.kde.Shutdown /Shutdown logoutAndReboot"
 
@@ -92,3 +100,27 @@ alias nam=man
 alias ns="npm start"
 
 alias nano="vim"
+
+alias cat="bat"
+alias less="bat"
+
+alias grep="rg"
+
+##########
+# COLORS
+##########
+
+# enable colors
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+
+# colorize man pages
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
