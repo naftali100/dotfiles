@@ -6,43 +6,49 @@
 [[ $- != *i* ]] && return
 # source ~/.git-propmt.sh
 
-_git_ps1(){
-     local git_status="$(git status 2> /dev/null)"
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+fi
 
-    if [[ ! $git_status =~ "working directory clean" ]]; then
-        echo -e $COLOR_RED
-    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-        echo -e $COLOR_YELLOW
-    elif [[ $git_status =~ "nothing to commit" ]]; then
-        echo -e $COLOR_GREEN
-    else
-        echo -e $COLOR_OCHRE
-    fi
-    
+_git_ps1(){
+    # red - dirty repo, uncommited changes
+    # yello - commits to push
+    # green - if nothing to commit, and all in sync
+    # (orange - out of sync with origin (branch))
+    # add branch +/- commits diff
+
     local RED="\033[0;31m"
     local GREEN="\033[0;32m"
     local NOCOLOR="\033[0m"
     local YELLOW="\033[0;33m"
     local BLACK="\033[0;30m"
-    
-    local git_modified_color="\[${GREEN}\]"
-    local git_status=$(git status 2>/dev/null | grep "Your branch is ahead" 2>/dev/null)
-    if [ "$git_status" != "" ]
-    then
-        git_modified_color="\[${YELLOW}\]"
-    fi
-    local git_status=$(git status --porcelain 2>/dev/null)
-    if [ "$git_status" != "" ]
-    then
-        git_modified_color="\[${RED}\]"
-    fi
-    
+    local ORANGE="\e[38;5;208m"
+
+    # check if git repo
     local git_branch=$(git branch --show-current 2>/dev/null)
     if [ "$git_branch" != "" ];
     then
-        git_branch="($git_modified_color$git_branch\[${BLACK}\]) "
+        local git_modified_color="${GREEN}"    
+        local git_status=$(git status 2>/dev/null | grep "Your branch is ahead" 2>/dev/null)
+        if [ "$git_status" != "" ]
+        then
+            git_modified_color="${YELLOW}"
+            git_branch="$git_branch +"
+        fi
+
+        local git_status=$(git status --porcelain 2>/dev/null)
+        if [ "$git_status" != "" ]
+        then
+            git_modified_color="${ORANGE}"
+            git_branch="$git_branch *"
+        fi
+    
+        git_branch="\033[0;34m─────\033[0;32m$git_modified_color($git_branch)${NOCOLOR}"
     fi
-    PS1="\[${BLACK}\]\u@\h \w $git_branch$\[${NOCOLOR}\] "
+
+    echo -e $git_branch
 }
 
 _set_my_PS1() {
@@ -52,8 +58,11 @@ _set_my_PS1() {
     export GIT_PS1_SHOWUPSTREAM="auto verbos name git"
     export GIT_PS1_DESCRIBE_STYLE="branch"
     export GIT_PS1_SHOWCOLORHINTS=true
-    PS1='\w$(__git_ps1 " (%s)")\$ '
-    # PS1="\n \[\033[0;34m\]╭─────\[\033[0;31m\]\[\033[0;37m\]\[\033[41m\] $OS_ICON \u \[\033[0m\]\[\033[0;31m\]\[\033[0;34m\]─────\[\033[0;32m\]\[\033[0;30m\]\[\033[42m\] \w \[\033[0m\]\[\033[0;32m\] \n \[\033[0;34m\]╰ \[\033[1;36m\]\$ \[\033[0m\]"
+
+    half=
+    back_half=
+    
+    PS1="\n \[\033[0;34m\]╭─────\[\033[0;31m\]\[\033[0;37m\]\[\033[41m\] $OS_ICON \u \[\033[0m\]\[\033[0;31m\]\[\033[0;34m\]─────\[\033[0;32m\]$half\[\033[0;30m\]\[\033[42m\] \w \[\033[0m\]\[\033[0;32m\]$back_half\$(_git_ps1) \n \[\033[0;34m\]╰ \[\033[1;36m\]\$ \[\033[0m\]"
     # PS1='\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[38;5;123m\]\w\[\e[0m\]\$ '
     if [ "$(whoami)" = "liveuser" ] ; then
         local iso_version="$(grep ^VERSION= /usr/lib/endeavouros-release 2>/dev/null | cut -d '=' -f 2)"
@@ -72,6 +81,9 @@ unset -f _set_my_PS1
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
 [[ -f ~/.inputrc ]] && bind -f ~/.inputrc
+# TODO: move this to inputrc
+# bind '"\e[A":history-search-backward'
+# bind '"\e[B":history-search-forward'
 
 ################################################################################
 ## Some generally useful functions.
@@ -227,8 +239,6 @@ export EDITOR=vim
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
-
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

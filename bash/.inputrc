@@ -1,10 +1,16 @@
 $include /etc/inputrc
 
 ## Use the up and down arrow keys for finding a command in history
-#bind '"\e[A":history-search-backward'
-#bind '"\e[B":history-search-forward'
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
 
 "\e[3;5~": shell-kill-word
 
 # Ctrl-Backspace
 "\C-H": shell-backward-kill-word
+
+set completion-ignore-case on
+set show-all-if-ambiguous on

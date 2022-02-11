@@ -1,7 +1,8 @@
 alias ser="sudo wg-quick up wg0; ssh n"
 
 mkdir(){
-    /bin/mkdir -pv "$1" && cd "$1"
+    # use only last param and ignore all other mkdir params
+    /bin/mkdir -pv "${@: -1}" && builtin cd "${@: -1}"
 }
 
 # cd only if exsist and list files 
@@ -111,7 +112,6 @@ alias grep="rg"
 ##########
 
 # enable colors
-alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
