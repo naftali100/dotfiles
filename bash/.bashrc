@@ -76,7 +76,7 @@ _set_my_PS1() {
 _set_my_PS1
 unset -f _set_my_PS1
 
-[[ "$(whoami)" = "root" ]] && return
+#[[ "$(whoami)" = "root" ]] && return
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 

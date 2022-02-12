@@ -1,4 +1,12 @@
-alias ser="sudo wg-quick up wg0; ssh n"
+ser(){
+    if ifconfig wg0 &>/dev/null ; then
+       ssh n
+    else 
+      echo 'opening wg'
+      sudo wg-quick up wg0 
+      ssh n
+    fi
+}
 
 mkdir(){
     # use only last param and ignore all other mkdir params
