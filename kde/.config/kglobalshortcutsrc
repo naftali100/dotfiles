@@ -1,6 +1,5 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
-switch-to-activity-24a70e6f-3466-45a7-89a4-63441c8d41ef=none,none,Switch to activity "work"
 switch-to-activity-9f3d075c-7fa5-4665-a3d6-35fdfa80d062=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
@@ -357,7 +356,7 @@ Turn Off Screen=none,none,Turn Off Screen
 _k_friendly_name=Power Management
 
 [plasmashell]
-_k_friendly_name=Latte Dock
+_k_friendly_name=Activity switching
 activate task manager entry 1=Meta+1,Meta+1,Activate Task Manager Entry 1
 activate task manager entry 10=none,Meta+0,Activate Task Manager Entry 10
 activate task manager entry 2=Meta+2,Meta+2,Activate Task Manager Entry 2
