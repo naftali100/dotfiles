@@ -17,7 +17,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'rafi/awesome-vim-colorschemes'
 " vscode dark theme
-" Plugin 'tomasiser/vim-code-dark'
+Plugin 'tomasiser/vim-code-dark'
 
 " Plugin 'mangeshrex/uwu.vim' " theme
 " Plugin 'wuelnerdotexe/vim-enfocado'
@@ -25,15 +25,17 @@ Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 
 Plugin 'ryanoasis/vim-devicons'
+
+Plugin 'neoclide/coc.nvim' " auto complete
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+filetype plugin indent on    " required"
 
-"
 " THEME SETTINGS
 "
 " random colorscheme
-" let my_colors = ['happy_hacking', 'codedark', 'hybrid_reverse', 'torte', 'one', 'deus', 'slate', 'solarized8_flat']
+" let my_colors = ['happy_hacking', 'codedark', 'hybrid_reverse', 'torte', 'one', 'deus', 'slate', 'solarized8_flat', 'dogrun', 'seoul256']
 " :execute 'colo' my_colors[rand() % len(my_colors)]
 function RandomColorScheme()
       let mycolors = split(globpath(&rtp,"**/colors/*.vim"),"\n") 
@@ -87,6 +89,8 @@ vnoremap <C-Down> :m '>+1<CR>gv=gv
 vnoremap <C-Up> :m '<-2<CR>gv=gv
 
 map <C-~> :term<CR>
+
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
