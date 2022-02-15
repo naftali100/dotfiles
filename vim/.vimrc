@@ -1,5 +1,5 @@
 "
-" set upj vundle plugin manager
+" set up vundle plugin manager
 "
 
 set nocompatible              " be iMproved, required
@@ -8,8 +8,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -17,13 +15,16 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-airline
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
-
+Plugin 'rafi/awesome-vim-colorschemes'
 " vscode dark theme
-Plugin 'tomasiser/vim-code-dark'
+" Plugin 'tomasiser/vim-code-dark'
 
+" Plugin 'mangeshrex/uwu.vim' " theme
+" Plugin 'wuelnerdotexe/vim-enfocado'
 " git support
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'ryanoasis/vim-devicons'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -31,27 +32,78 @@ filetype plugin indent on    " required
 "
 " THEME SETTINGS
 "
+" random colorscheme
+" let my_colors = ['happy_hacking', 'codedark', 'hybrid_reverse', 'torte', 'one', 'deus', 'slate', 'solarized8_flat']
+" :execute 'colo' my_colors[rand() % len(my_colors)]
+function RandomColorScheme()
+      let mycolors = split(globpath(&rtp,"**/colors/*.vim"),"\n") 
+        exe 'so ' . mycolors[localtime() % len(mycolors)]
+          unlet mycolors
+      endfunction
 
-" Allow crosshair cursor highlighting.
-hi CursorLine   cterm=NONE ctermbg=0
+call RandomColorScheme()
+:command NewColor call RandomColorScheme()
+" let g:airline_theme = 'enfocado'
+" set termguicolors
+" let g:enfocado_style = 'neon' " Available: `nature` or `neon`.
+" autocmd VimEnter * ++nested colorscheme enfocado
+
+" colorscheme uwu
+" To enable
+" let g:UwuNR=1 " default
+
+" hi CursorLine   cterm=NONE ctermbg=0 ctermfg=white guibg=darkred guifg=white
+hi CursorLine   cterm=NONE ctermbg=0 " Allow crosshair cursor highlighting.
 set cursorline
-
+set guifont="jetBrainsMono Nerd Font" 12
 set linespace=3
-set guifont=Fira\ Code:h12
-
-" enable dark color theme
-colorscheme codedark
+set number             " set line numbers
+set tabstop=4          " How many columns of whitespace a \t is worth
+set shiftwidth=4       " How many columns of whitespace a level of indentation is worth
+set expandtab          " Use spaces when tabbing
+set termwinsize=12x0   " Set terminal size
+set splitbelow         " Always split below
+set mouse=a            " Enable mouse drag on window splits
+set whichwrap+=<,>,[,] " make arrow key to change lines
+set ttimeoutlen=10
+" set guifont=Fira\ Code:h12
+" set clipboard=unnamedplus " enable copy from and to vim
+" colorscheme codedark " enable dark color theme
 " let g:airline_theme = 'codedark'
 
 map k <Down>
 map j <Up>
+map <Leader>l :set relativenumber!<CR> " toggle relative line numbers with leader+l
 
 syntax on
 
-" set line numbers
-set number
-" toggle relative line numbers with leader+l
-map <Leader>l :set relativenumber!<CR>
+
+
+nnoremap <C-Down> :m .+1<CR>==
+nnoremap <C-Up> :m .-2<CR>==
+inoremap <C-Down> <Esc>:m .+1<CR>==gi
+inoremap <C-Up> <Esc>:m .-2<CR>==gi
+vnoremap <C-Down> :m '>+1<CR>gv=gv
+vnoremap <C-Up> :m '<-2<CR>gv=gv
+
+map <C-~> :term<CR>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " keep the curser in the center
 " augroup VCenterCursor
@@ -59,31 +111,3 @@ map <Leader>l :set relativenumber!<CR>
 "  au BufEnter,WinEnter,WinNew,VimResized *,*.*
 "        \ let &scrolloff=winheight(win_getid())/2
 " augroup END
-
-nnoremap <A-Down> :m .+1<CR>==
-nnoremap <A-Up> :m .-2<CR>==
-inoremap <A-Down> <Esc>:m .+1<CR>==gi
-inoremap <A-Up> <Esc>:m .-2<CR>==gi
-vnoremap <A-Down> :m '>+1<CR>gv=gv
-vnoremap <A-Up> :m '<-2<CR>gv=gv
-
-map <C-~> :term<CR>
-
-" How many columns of whitespace a \t is worth
-set tabstop=4 
-" How many columns of whitespace a level of indentation is worth
-set shiftwidth=4 
-" Use spaces when tabbing
-set expandtab
-
-set termwinsize=12x0   " Set terminal size
-set splitbelow         " Always split below
-set mouse=a            " Enable mouse drag on window splits
-" enable copy from and to vim
-set clipboard=unnamedplus
-
-" make arrow key to change lines
-set whichwrap+=<,>,[,]
-
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
