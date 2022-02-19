@@ -214,18 +214,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-/bin/cat <<'EOF'
-__   __  ______   _______     _______  ___  ______   ______  
-\ \ / / |____  | |_____  |   |____  .||_  ||____  | |____  | 
-|  V /       | |   _   | |        | |   | |     | |      | | 
-| |\ \  _____| |_ | |  | |        | |   | |     | | _____| |_
-|_| \_\/________/ |_|  |_|        | |   |_|     |_|/________/
-                                  |_|                        
-וגם וויל המלך
-EOF
-
-echo "tools_reminder: ranger, rg"
-
 # ==========
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin:/home/naftali/.local/bin"

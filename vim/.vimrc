@@ -16,35 +16,32 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'rafi/awesome-vim-colorschemes'
-" vscode dark theme
-Plugin 'tomasiser/vim-code-dark'
-
-" Plugin 'mangeshrex/uwu.vim' " theme
+Plugin 'tomasiser/vim-code-dark'            " vscode dark theme
+" Plugin 'mangeshrex/uwu.vim'               " theme
 " Plugin 'wuelnerdotexe/vim-enfocado'
-" git support
-Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'                 " git support
+Plugin 'ryanoasis/vim-devicons'             " icons
+Plugin 'preservim/nerdtree'                 " file tree
+Plugin 'tpope/vim-commentary'               " comment lines
+Plugin 'neoclide/coc.nvim'                  " auto complete
 
-Plugin 'ryanoasis/vim-devicons'
-
-Plugin 'neoclide/coc.nvim' " auto complete
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required"
+call vundle#end()                           " required
+filetype plugin indent on                   " required"
 
 " THEME SETTINGS
 "
 " random colorscheme
-" let my_colors = ['happy_hacking', 'codedark', 'hybrid_reverse', 'torte', 'one', 'deus', 'slate', 'solarized8_flat', 'dogrun', 'seoul256']
-" :execute 'colo' my_colors[rand() % len(my_colors)]
-function RandomColorScheme()
-      let mycolors = split(globpath(&rtp,"**/colors/*.vim"),"\n") 
-        exe 'so ' . mycolors[localtime() % len(mycolors)]
-          unlet mycolors
-      endfunction
+" hybrid_reverse
+let my_colors = ['happy_hacking', 'codedark', 'torte', 'one', 'deus', 'slate', 'solarized8_flat', 'dogrun', 'seoul256', 'twilight256', 'rakr', 'angr']
+:execute 'colo' my_colors[rand() % len(my_colors)]
+" function RandomColorScheme()
+"      let mycolors = split(globpath(&rtp,"**/colors/*.vim"),"\n") 
+"        exe 'so ' . mycolors[localtime() % len(mycolors)]
+"          unlet mycolors
+"      endfunction
 
-call RandomColorScheme()
-:command NewColor call RandomColorScheme()
+" call RandomColorScheme()
+" :command NewColor call RandomColorScheme()
 " let g:airline_theme = 'enfocado'
 " set termguicolors
 " let g:enfocado_style = 'neon' " Available: `nature` or `neon`.
@@ -55,19 +52,21 @@ call RandomColorScheme()
 " let g:UwuNR=1 " default
 
 " hi CursorLine   cterm=NONE ctermbg=0 ctermfg=white guibg=darkred guifg=white
-hi CursorLine   cterm=NONE ctermbg=0 " Allow crosshair cursor highlighting.
+hi CursorLine cterm=NONE ctermbg=0 ctermfg=0     " Allow crosshair cursor highlighting.
 set cursorline
 set guifont="jetBrainsMono Nerd Font" 12
 set linespace=3
-set number             " set line numbers
-set tabstop=4          " How many columns of whitespace a \t is worth
-set shiftwidth=4       " How many columns of whitespace a level of indentation is worth
-set expandtab          " Use spaces when tabbing
-set termwinsize=12x0   " Set terminal size
-set splitbelow         " Always split below
-set mouse=a            " Enable mouse drag on window splits
+set number                                  " set line numbers
+set tabstop=4                               " How many columns of whitespace a \t is worth
+set shiftwidth=4                            " How many columns of whitespace a level of indentation is worth
+set expandtab                               " Use spaces when tabbing
+set termwinsize=12x0                        " Set terminal size
+set splitbelow                              " Always split below
+set mouse=a                                 " Enable mouse drag on window splits
 set whichwrap+=<,>,[,] " make arrow key to change lines
 set ttimeoutlen=10
+set wildmenu
+set wildmode=longest,list,full
 " set guifont=Fira\ Code:h12
 " set clipboard=unnamedplus " enable copy from and to vim
 " colorscheme codedark " enable dark color theme
@@ -80,7 +79,7 @@ map <Leader>l :set relativenumber!<CR> " toggle relative line numbers with leade
 syntax on
 
 
-
+nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-Down> :m .+1<CR>==
 nnoremap <C-Up> :m .-2<CR>==
 inoremap <C-Down> <Esc>:m .+1<CR>==gi
