@@ -1,13 +1,12 @@
 ## my dotfiles
 
 i  use gnu stow to symlink the files to home folder.
-to use this repo
 
-download it. and run this command
+to use this repo, clone it and run this commands
 
 ```bash
 cd dotfiles
-stow *
+stow {bash,zsh} // add packages you want to stow 
 ```
 
 by default dotfiles will stow to `~` folder

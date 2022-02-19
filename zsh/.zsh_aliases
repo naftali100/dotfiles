@@ -1,2 +1,2 @@
 alias type='whence -fv $1'
-#as
+alias npm='pnpm'
