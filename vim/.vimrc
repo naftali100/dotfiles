@@ -32,7 +32,7 @@ filetype plugin indent on                   " required"
 "
 " random colorscheme
 " hybrid_reverse
-let my_colors = ['happy_hacking', 'codedark', 'torte', 'deus', 'slate', 'solarized8_flat', 'dogrun', 'seoul256', 'twilight256', 'angr']
+let my_colors = ['happy_hacking', 'codedark', 'torte', 'deus', 'slate', 'dogrun', 'seoul256', 'twilight256', 'angr']
 :execute 'colo' my_colors[rand() % len(my_colors)]
 " function RandomColorScheme()
 "      let mycolors = split(globpath(&rtp,"**/colors/*.vim"),"\n") 

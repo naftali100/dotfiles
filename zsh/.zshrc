@@ -123,3 +123,6 @@ source /usr/share/doc/mcfly/mcfly.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
+export PNPM_HOME="/home/naftali/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
