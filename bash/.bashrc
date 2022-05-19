@@ -215,7 +215,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # ==========
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+# export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin:/home/naftali/.local/bin"
 
 # eval $(thefuck --alias f)
@@ -233,7 +233,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # mcfly: bash history search tool
-source /usr/share/doc/mcfly/mcfly.bash
+[ -f /usr/share/doc/mcfly/mcfly.bash ] && source /usr/share/doc/mcfly/mcfly.bash
 
 # disable ctrl-s from freez the terminal
 stty -ixon
