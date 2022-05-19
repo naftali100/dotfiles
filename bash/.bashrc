@@ -237,3 +237,6 @@ source /usr/share/doc/mcfly/mcfly.bash
 
 # disable ctrl-s from freez the terminal
 stty -ixon
+
+# enable cd to folder without "cd" command
+shopt -s autocd
