@@ -13,10 +13,26 @@ mkdir(){
     /bin/mkdir -pv "${@: -1}" && builtin cd "${@: -1}"
 }
 
-# cd only if exsist and list files 
-#cd(){
-#    [ -d "$1" ] && builtin cd "$1" && ls
-#}
+# if in python virtuall env auto source it 
+# from: https://stackoverflow.com/a/50830617/12893054
+function cd() {
+  builtin cd "$@"
+
+  if [[ -z "$VIRTUAL_ENV" ]] ; then
+    ## If env folder is found then activate the vitualenv
+      if [[ -d ./.env ]] ; then
+        source ./.env/bin/activate
+      fi
+  else
+    ## check the current folder belong to earlier VIRTUAL_ENV folder
+    # if yes then do nothing
+    # else deactivate
+      parentdir="$(dirname "$VIRTUAL_ENV")"
+      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+        deactivate
+      fi
+  fi
+}
 
 # create new folder and name it as today date
 # move the files to that folder  
@@ -114,6 +130,8 @@ alias cat="bat"
 alias less="bat"
 
 alias grep="rg"
+
+alias conf="/usr/bin/git -C $HOME/dotfiles "
 
 ##########
 # COLORS
