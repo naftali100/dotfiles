@@ -80,6 +80,8 @@ syntax on
 
 
 nnoremap <C-t> :NERDTreeToggle<CR>
+
+" moving lines up and down using crtl+up/down in all modes
 nnoremap <C-Down> :m .+1<CR>==
 nnoremap <C-Up> :m .-2<CR>==
 inoremap <C-Down> <Esc>:m .+1<CR>==gi
@@ -96,16 +98,16 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
+    let g:airline_symbols = {}
+endif
 
 " airline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 " keep the curser in the center
@@ -114,3 +116,16 @@ let g:airline_symbols.linenr = ''
 "  au BufEnter,WinEnter,WinNew,VimResized *,*.*
 "        \ let &scrolloff=winheight(win_getid())/2
 " augroup END
+
+" disable indentation when pasting - not working?
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    :echom "AG FOUND"
+    return ""
+endfunction
