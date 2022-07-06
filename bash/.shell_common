@@ -1,0 +1,31 @@
+## my aliases
+if [ -f ~/.shell_aliases ]; then
+    . ~/.shell_aliases
+fi
+
+# ========== 
+# ENV exports
+export EDITOR=vim
+ 
+# nvm setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if type ruby &> /dev/null; then
+    export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+    export PATH="$PATH:$GEM_HOME/bin"
+fi
+
+if type thefuck &> /dev/null; then
+    eval $(thefuck --alias f)
+fi
+
+# update PATH
+export PNPM_HOME="/home/naftali/.local/share/pnpm"
+export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
+
+# bat as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export CMAKE_GENERATOR=Ninja

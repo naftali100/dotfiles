@@ -85,17 +85,13 @@ GIT_AUTO_FETCH_INTERVAL=3600 # in seconds
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #[[ -f ~/.inputrc ]] && bindkey ~/.inputrc
 bindkey "^H" backward-kill-word
 
 # my aliases
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.shell_common ]; then
+    . ~/.shell_common
 fi
 
 if [ -f ~/.zsh_aliases ]; then
@@ -112,17 +108,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export CMAKE_GENERATOR=Ninja
-
 # mcfly: bash history search tool
-source /usr/share/doc/mcfly/mcfly.zsh
+[ -f /usr/share/doc/mcfly/mcfly.zsh ] && source /usr/share/doc/mcfly/mcfly.zsh
 
 #source .my-posh
 #eval "$(oh-my-posh prompt init zsh --config ~/.poshthemes/my-theme.omp.json)"
 #enable_poshtooltips
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-export PNPM_HOME="/home/naftali/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"

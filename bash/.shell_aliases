@@ -60,15 +60,11 @@ commits(){
     git commit -S11C0F30B96D4CBFE -a -m "$*"
 }
 
-run(){
+# run c/c++ 
+runc(){
     one=$1
-    gcc -Wall $1 -o ${one%.*} 
+    g++ -Wall $1 -o ${one%.*} 
     ./${one%.*} ${@:2} 
-}
-runpp(){
-    one=$1
-    g++ -Wall $1 -o ${one%.*}
-    ./${one%.*} ${@:2}
 }
 
 killport () {
@@ -97,12 +93,11 @@ alias cls="clear"
 alias tf='tail -f'
 
 alias ls=ranger
-alias exa='exa --icons'
+alias exa='exa --icons --git'
 alias l='exa -la'   # show long listing
-alias lll='exa -Tla' # show tree of all files
+alias ll='exa -Tla' # show tree of all files
 
 alias upload="scp"
-alias p="cd ~/Documents/program"
 alias service="systemctl"
 alias sudo="sudo "
 
@@ -118,7 +113,7 @@ alias qr=qrencode
 alias off="qdbus org.kde.Shutdown /Shutdown logoutAndShutdown"
 alias reboot="qdbus org.kde.Shutdown /Shutdown logoutAndReboot"
 
-#alias npm=pnpm
+alias npm=pnpm
 alias man="tldr -t ocean"
 alias nam=man
 
