@@ -114,10 +114,12 @@ alias off="qdbus org.kde.Shutdown /Shutdown logoutAndShutdown"
 alias reboot="qdbus org.kde.Shutdown /Shutdown logoutAndReboot"
 
 alias npm=pnpm
+alias npx=pnpx
+alias ns="npm start"
+
 alias man="tldr -t ocean"
 alias nam=man
 
-alias ns="npm start"
 
 alias nano="vim"
 
@@ -128,6 +130,8 @@ alias grep="rg"
 
 alias conf="/usr/bin/git -C $HOME/dotfiles "
 
+alias p="cd ~/Documents/program"
+alias work="code ~/Documents/program/quicker-app"
 ##########
 # COLORS
 ##########
