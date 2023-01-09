@@ -114,7 +114,7 @@ alias off="qdbus org.kde.Shutdown /Shutdown logoutAndShutdown"
 alias reboot="qdbus org.kde.Shutdown /Shutdown logoutAndReboot"
 
 alias npm=pnpm
-alias npx=pnpx
+alias npx="pnpm exec"
 alias ns="npm start"
 
 alias man="tldr -t ocean"
