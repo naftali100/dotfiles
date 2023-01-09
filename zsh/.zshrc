@@ -109,7 +109,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # mcfly: bash history search tool
-[ -f /usr/share/doc/mcfly/mcfly.zsh ] && source /usr/share/doc/mcfly/mcfly.zsh
+# [ -f /usr/share/doc/mcfly/mcfly.zsh ] && source /usr/share/doc/mcfly/mcfly.zsh
+eval "$(mcfly init zsh)"
 
 #source .my-posh
 #eval "$(oh-my-posh prompt init zsh --config ~/.poshthemes/my-theme.omp.json)"
