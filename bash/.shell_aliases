@@ -127,6 +127,7 @@ alias cat="bat"
 alias less="bat"
 
 alias grep="rg"
+alias find="fd"
 
 alias conf="/usr/bin/git -C $HOME/dotfiles "
 
