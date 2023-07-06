@@ -150,3 +150,12 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# check if kubecolor is installed
+if command -v kubecolor >/dev/null 2>&1; then
+    alias kubectl="kubecolor"
+    compdef kubecolor=kubectl
+fi
+
+alias k="kubectl"
+alias watch='watch '

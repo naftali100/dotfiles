@@ -135,3 +135,10 @@ shopt -s autocd
 if [ -f ~/.shell_common ]; then
     . ~/.shell_common
 fi
+PATH=~/.console-ninja/.bin:$PATH
+
+if command -v vagrant >/dev/null 2>&1; then
+    # >>>> Vagrant command completion (start)
+    . /opt/vagrant/embedded/gems/gems/vagrant-2.3.7/contrib/bash/completion.sh
+    # <<<<  Vagrant command completion (end)
+fi
