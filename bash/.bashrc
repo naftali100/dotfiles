@@ -142,3 +142,5 @@ if command -v vagrant >/dev/null 2>&1; then
     . /opt/vagrant/embedded/gems/gems/vagrant-2.3.7/contrib/bash/completion.sh
     # <<<<  Vagrant command completion (end)
 fi
+
+complete -C /usr/bin/terraform terraform
