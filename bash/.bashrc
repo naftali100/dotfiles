@@ -128,9 +128,6 @@ shopt -s autocd
 
 [[ -f ~/.inputrc ]] && bind -f ~/.inputrc
 
-# mcfly: bash history search tool
-[ -f /usr/share/doc/mcfly/mcfly.bash ] && source /usr/share/doc/mcfly/mcfly.bash
-
 # my aliases
 if [ -f ~/.shell_common ]; then
     . ~/.shell_common

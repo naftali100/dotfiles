@@ -104,28 +104,12 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# mcfly: bash history search tool
-# [ -f /usr/share/doc/mcfly/mcfly.zsh ] && source /usr/share/doc/mcfly/mcfly.zsh
-eval "$(mcfly init zsh)"
-
 #source .my-posh
 #eval "$(oh-my-posh prompt init zsh --config ~/.poshthemes/my-theme.omp.json)"
 #enable_poshtooltips
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-if type zoxide &> /dev/null; then
-    eval "$(zoxide init zsh)"
-fi
-
-if type kubectl &> /dev/null; then
-  source <(kubectl completion zsh)
-fi
 
 if command -v vagrant >/dev/null 2>&1; then
   # >>>> Vagrant command completion (start)

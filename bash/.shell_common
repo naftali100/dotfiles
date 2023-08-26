@@ -7,11 +7,32 @@ fi
 # ENV exports
 export EDITOR=vim
 export XDG_CONFIG_HOME="$HOME/.config"
- 
-# nvm setup
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+SHELL_NAME=$(basename $SHELL)
+
+# update PATH
+export PNPM_HOME="/home/naftali/.local/share/pnpm"
+export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
+
+# bat as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export CMAKE_GENERATOR=Ninja
+
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# oracle cli
+export PATH=/home/naftali/bin:$PATH
+[[ -e "/home/naftali/lib/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/naftali/lib/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh"
+
+## set rootles docker host
+if [ -f ~/.config/systemd/user/docker.service ]; then
+    export DOCKER_HOST=unix:///run/user/1000/docker.sock
+fi
+
+#######
+# tools setup
+#######
 
 if command -v ruby >/dev/null 2>&1; then
     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
@@ -22,28 +43,22 @@ if command -v thefuck >/dev/null 2>&1; then
     eval $(thefuck --alias f)
 fi
 
-# update PATH
-export PNPM_HOME="/home/naftali/.local/share/pnpm"
-export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
-
-# bat as manpager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-export CMAKE_GENERATOR=Ninja
-# export XDG_CONFIG_HOME="~/.config"
-
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-# oracle cli
-export PATH=/home/naftali/bin:$PATH
-[[ -e "/home/naftali/lib/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/naftali/lib/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh"
-
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-## set rootles docker host
-if [ -f ~/.config/systemd/user/docker.service ]; then
-    export DOCKER_HOST=unix:///run/user/1000/docker.sock
+# nvm setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# mcfly: bash history search tool
+eval "$(mcfly init $SHELL_NAME)"
+
+if type zoxide &> /dev/null; then
+    eval "$(zoxide init $SHELL_NAME)"
+fi
+
+if type kubectl &> /dev/null; then
+  source <(kubectl completion $SHELL_NAME)
 fi
