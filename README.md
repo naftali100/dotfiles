@@ -1,6 +1,6 @@
 ## my dotfiles
 
-i  use gnu stow to symlink the files to home folder.
+I  use [gnu stow](https://www.gnu.org/software/stow/) to symlink the files to home folder.
 
 to use this repo, clone it and run this commands
 
