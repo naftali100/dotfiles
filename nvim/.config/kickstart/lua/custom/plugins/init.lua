@@ -4,8 +4,9 @@
 -- See the kickstart.nvim README for more information
 return {
   -- Auto close brackets
-  'm4xshen/autoclose.nvim',
+  -- 'm4xshen/autoclose.nvim',
 
+  "windwp/nvim-autopairs",
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -16,13 +17,33 @@ return {
     },
     keys = {
       { "<leader>nt", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+      { "<leader>nf", "<cmd>Neotree focus<cr>",  desc = "focus on NeoTree" },
     },
-    config = function()
-      require("neo-tree").setup()
-    end,
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+          hide_gitignored = true,
+        },
+      }
+    }
   },
 
   'ThePrimeagen/vim-be-good',
   -- 'virchau13/tree-sitter-astro',
   'karb94/neoscroll.nvim',
+  -- {
+  --   'windwp/nvim-autopairs',
+  --   event = "InsertEnter",
+  --   opts = {
+  --     ignored_next_char = "[%w%.]" -- will ignore alphanumeric and `.` symbol
+  --   }                          -- this is equalent to setup({}) function
+  -- }
+  -- {
+  --   'goolord/alpha-nvim',
+  --   config = function()
+  --     require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+  --   end
+  -- }
 }

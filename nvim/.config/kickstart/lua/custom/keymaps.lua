@@ -1,0 +1,2 @@
+-- in insert mode, use ctrl+/ to add commnet
+-- vim.api.nvim_set_keymap('i', '<C-/>', '<C-\\><C-o>:stopinsert<CR>:lua require("Comment.api").insert.blockwise.eol()<CR>', noremap = true, silent = false })
