@@ -16,8 +16,8 @@ return {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { "<leader>nt", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-      { "<leader>nf", "<cmd>Neotree focus<cr>",  desc = "focus on NeoTree" },
+      { "<leader>nt", "<cmd>Neotree toggle<cr>", desc = "[N]eo[T]ree" },
+      { "<leader>nf", "<cmd>Neotree focus<cr>",  desc = "[f]ocus on [N]eoTree" },
     },
     opts = {
       filesystem = {
@@ -31,7 +31,6 @@ return {
   },
 
   'ThePrimeagen/vim-be-good',
-  -- 'virchau13/tree-sitter-astro',
   'karb94/neoscroll.nvim',
   -- {
   --   'windwp/nvim-autopairs',
