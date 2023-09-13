@@ -1,22 +1,8 @@
--- in insert mode, use ctrl+/ to add commnet
--- vim.api.nvim_set_keymap('i', '<C-/>', '<C-\\><C-o>:stopinsert<CR>:lua require("Comment.api").insert.blockwise.eol()<CR>', noremap = true, silent = false })
--- Map Alt+Up to move the current line up
--- inoremap <M-Up> <Esc>:m-2<CR>i
--- vim.keymap.set('i', '<M-Up>', '<Esc>:m-2<CR>i')
--- vim.keymap.set('i', '<M-k>', function()
---   print('in M-Up')
--- end)
--- -- Map Alt+Down to move the current line down
--- -- inoremap <M-Down> <Esc>:m+1<CR>i
--- vim.keymap.set('n', '<M-q>', function()
---   print('blalaflfa')
--- end)
-
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- See `:help vim.keymap.set()`
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Remap for dealing with word wrap
@@ -24,14 +10,45 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- from ThePrimagen's dotfiles
+-- move by page and paragraph, and keep the view centered
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "}", "{zz")
+vim.keymap.set("n", "{", "}zz")
+
+vim.keymap.set({ "i", "c", "v" }, "<c-c>", "<esc>")
+
+--[[ LSP settings ]]
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- move line up and down using alt+up and alt+down, for both normal and insert mode
+vim.keymap.set({ "n" }, "<M-k>", "<Esc>:m .-2<CR>")
+vim.keymap.set({ "n" }, "<M-j>", "<Esc>:m .+1<CR>")
+vim.keymap.set({ "i" }, "<M-k>", "<Esc>:m .-2<CR>:startinsert<CR>")
+vim.keymap.set({ "i" }, "<M-j>", "<Esc>:m .+1<CR>:startinsert<CR>")

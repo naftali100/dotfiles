@@ -5,7 +5,6 @@
 return {
   -- Auto close brackets
   -- 'm4xshen/autoclose.nvim',
-
   "windwp/nvim-autopairs",
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -20,6 +19,7 @@ return {
       { "<leader>nf", "<cmd>Neotree focus<cr>",  desc = "[f]ocus on [N]eoTree" },
     },
     opts = {
+      close_if_last_window = true,
       filesystem = {
         filtered_items = {
           visible = true,
@@ -45,4 +45,12 @@ return {
   --     require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
   --   end
   -- }
+  {
+    'f-person/git-blame.nvim',
+    opts = {
+      virtual_text_column = 80
+    }
+  },
+  'Exafunction/codeium.vim', -- codeium ai
+  --  'unblevable/quick-scope',  -- highlighs unique characters for easier f,t navigation
 }
