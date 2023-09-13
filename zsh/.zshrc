@@ -128,7 +128,7 @@ complete -o nospace -C /usr/bin/terraform terraform
 #
 ##############
 alias vim="nvim"
-alias nvim="nvim-kick"
+# alias nvim="nvim-kick"
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
@@ -147,3 +147,10 @@ function nvims() {
 }
 
 bindkey -s ^a "nvims\n"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
