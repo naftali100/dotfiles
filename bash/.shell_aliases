@@ -133,6 +133,10 @@ alias conf="/usr/bin/git -C $HOME/dotfiles "
 
 alias p="cd ~/Documents/program"
 alias work="code ~/Documents/program/quicker-app"
+
+# TODO: handle * in selected branch
+alias bb="git branch -a --sort=-committerdate | sed 's/remotes\/origin\///' | sort | uniq | fzf --height=20% | xargs git switch "
+
 ##########
 # COLORS
 ##########
@@ -143,13 +147,13 @@ alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 
 # colorize man pages
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+# export LESS_TERMCAP_mb=$'\e[1;32m'
+# export LESS_TERMCAP_md=$'\e[1;32m'
+# export LESS_TERMCAP_me=$'\e[0m'
+# export LESS_TERMCAP_se=$'\e[0m'
+# export LESS_TERMCAP_so=$'\e[01;33m'
+# export LESS_TERMCAP_ue=$'\e[0m'
+# export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # check if kubecolor is installed
 if command -v kubecolor >/dev/null 2>&1; then
