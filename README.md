@@ -12,3 +12,9 @@ stow {bash,zsh} // add packages you want to stow
 by default dotfiles will stow to `~` folder
 
 you can change this in .stowrc file or by passing --target argument
+
+### icons
+
+I use [nerd font icons](https://www.nerdfonts.com/)
+
+to install nerd fonts, I use [getNf](https://github.com/ronniedroid/getnf)
