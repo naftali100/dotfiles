@@ -93,7 +93,7 @@ alias cls="clear"
 alias tf='tail -f'
 
 alias ls=ranger
-alias exa='exa --icons --git'
+alias exa='eza --icons --git' # the new maintained exa
 alias l='exa -la'   # show long listing
 alias ll='exa -Tla' # show tree of all files
 
@@ -136,7 +136,11 @@ alias work="code ~/Documents/program/quicker-app"
 
 # TODO: handle * in selected branch
 alias bb="git branch -a --sort=-committerdate | sed 's/remotes\/origin\///' | sort | uniq | fzf --height=20% | xargs git switch "
+alias gpull='git stash && git pull && git stash pop'
 
+alias cheat='cheat_command() { curl cheat.sh/"$@"; }; cheat_command'
+
+alias docker-compose="docker compose"
 ##########
 # COLORS
 ##########
