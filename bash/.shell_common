@@ -14,7 +14,7 @@ export PNPM_HOME="/home/naftali/.local/share/pnpm"
 export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
 
 # bat as manpager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export CMAKE_GENERATOR=Ninja
 

@@ -117,7 +117,7 @@ alias npm=pnpm
 alias npx="pnpm exec"
 alias ns="npm start"
 
-alias man="tldr -t ocean"
+# alias man="tldr -t ocean"
 alias nam=man
 
 
