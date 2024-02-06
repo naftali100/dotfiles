@@ -244,6 +244,20 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 // visit https://github.com/yokoffing/Betterfox/wiki/Optional-Hardening
 // Enter your personal overrides below this line:
 
+// PREF: enable container tabs
+user_pref("privacy.userContext.enabled", true);
+
+// PREF: enable HTTPS-Only Mode
+// Warn me before loading sites that don't support HTTPS
+// in both Normal and Private Browsing windows.
+user_pref("dom.security.https_only_mode", true);
+user_pref("dom.security.https_only_mode_error_page_user_suggestions", true);
+
+// PREF: require safe SSL negotiation
+// may break some websites, check back later
+// [ERROR] SSL_ERROR_UNSAFE_NEGOTIATION
+user_pref("security.ssl.require_safe_negotiation", true);
+
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
 ****************************************************************************/
@@ -252,6 +266,7 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 
 user_pref("apz.overscroll.enabled", true); // not DEFAULT on Linux
 user_pref("general.smoothScroll", true); // DEFAULT
+user_pref("general.smoothScroll.msdPhysics.enabled", true);
 user_pref("mousewheel.default.delta_multiplier_y", 200); // 250-400; adjust this number to your liking
 
 
