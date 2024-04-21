@@ -59,6 +59,7 @@ plugins=(
     git-auto-fetch
     zsh-autosuggestions
     zsh-syntax-highlighting
+    ohmyzsh-full-autoupdate
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -127,7 +128,7 @@ complete -o nospace -C /usr/bin/terraform terraform
 # https://gist.github.com/elijahmanor/b279553c0132bfad7eae23e34ceb593b
 #
 ##############
-alias vim="nvim"
+alias vim="nvim-kick"
 # alias nvim="nvim-kick"
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"

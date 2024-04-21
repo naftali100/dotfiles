@@ -134,9 +134,13 @@ alias qr=qrencode
 alias off="qdbus org.kde.Shutdown /Shutdown logoutAndShutdown"
 alias reboot="qdbus org.kde.Shutdown /Shutdown logoutAndReboot"
 
+# alias pnpm=bun 
 alias npm=pnpm
-alias npx="pnpm exec"
-alias ns="npm start"
+alias npx=bunx
+
+alias ns="bun start"
+alias nd="bun run dev"
+alias ni="pnpm i"
 
 # alias man="tldr -t ocean"
 alias nam=man

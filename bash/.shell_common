@@ -62,3 +62,10 @@ fi
 if type kubectl &> /dev/null; then
   source <(kubectl completion $SHELL_NAME)
 fi
+
+if type atuin &> /dev/null; then
+    eval "$(atuin init $SHELL_NAME)"
+fi
+
+# bun completions
+[ -s "/home/naftali/.bun/_bun" ] && source "/home/naftali/.bun/_bun"
