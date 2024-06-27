@@ -67,5 +67,9 @@ if type atuin &> /dev/null; then
     eval "$(atuin init $SHELL_NAME)"
 fi
 
+if type pnpm &> /dev/null; then
+    eval "$(pnpm completion $SHELL_NAME)"
+fi
+
 # bun completions
 [ -s "/home/naftali/.bun/_bun" ] && source "/home/naftali/.bun/_bun"
