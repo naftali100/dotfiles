@@ -1,5 +1,6 @@
 ## my dotfiles
 
+### Usage
 I  use [gnu stow](https://www.gnu.org/software/stow/) to symlink the files to home folder.
 
 to use this repo, clone it and run this commands
@@ -13,24 +14,18 @@ by default dotfiles will stow to `~` folder
 
 you can change this in .stowrc file or by passing `--target` argument
 
-### system
-OS: fedora
+### System
+- OS: fedora
+- global theme: [catppuccin](https://catppuccin.com/)
+- shell: zsh
+- shell theme: p10k
+- zsh package manager: omz
+- terminal: Tilix
+- editor: vscode
+- launcher: ulauncher
+- font: JetBrainsMono
 
-shell: zsh
-
-shell theme: p10k
-
-zsh package manager: omz
-
-terminal: Tilix
-
-editor: vscode
-
-launcher: ulauncher
-
-font: JetBrainsMono
-
-### icons
+### Icons
 
 I use [nerd font icons](https://www.nerdfonts.com/)
 
