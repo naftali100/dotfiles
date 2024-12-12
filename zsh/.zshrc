@@ -99,11 +99,6 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
-# fix for tilix terminal
-# https://gnunn1.github.io/tilix-web/manual/vteconfig/
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
 
 #source .my-posh
 #eval "$(oh-my-posh prompt init zsh --config ~/.poshthemes/my-theme.omp.json)"

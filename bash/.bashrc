@@ -114,12 +114,6 @@ _open_files_for_editing() {
 # alias ef='_open_files_for_editing'     # 'ef' opens given file(s) for editing
 ################################################################################
 
-# fix for tilix terminal
-# https://gnunn1.github.io/tilix-web/manual/vteconfig/
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
-
 # disable ctrl-s from freez the terminal
 stty -ixon
 
