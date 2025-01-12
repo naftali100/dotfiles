@@ -1,0 +1,20 @@
+[user]
+	email = 48069590+naftali100@users.noreply.github.com
+	name = naftali
+[http]
+	postbuffer = 524288000
+[credential]
+	helper = cache --timeout=86400
+[global]
+
+[alias]
+    mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+		# create new tag with the next patch version
+		auto-tag = "!f() { \\\n  git fetch --tags && \\\n  latest=$(git describe --tags --abbrev=0 2>/dev/null || echo \"v0.0.0\"); \\\n  IFS=. read -r major minor patch <<<\"${latest//v/}\"; \\\n  patch=$((patch + 1)); \\\n  new_tag=\"v$major.$minor.$patch\"; \\\n  git tag -a \"$new_tag\" -m \"Release $new_tag\" && \\\n  git push origin \"$new_tag\" && \\\n  echo \"Created and pushed new tag: $new_tag\"; \\\n}; f"
+
+[gitbutler]
+	aiModelProvider = openai
+	aiOpenAIKeyOption = butlerAPI
+	aiOpenAIModelName = gpt-3.5-turbo
+	aiAnthropicKeyOption = butlerAPI
+	aiAnthropicModelName = claude-3-haiku-20240307
