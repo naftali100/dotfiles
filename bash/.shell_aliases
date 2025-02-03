@@ -118,6 +118,7 @@ alias exa='eza --icons --git' # the new maintained exa
 alias l='exa -la'   # show long listing
 alias ll='exa -Tla' # show tree of all files
 
+alias nvm=fnm
 alias upload="scp"
 alias service="systemctl"
 alias sudo="sudo "

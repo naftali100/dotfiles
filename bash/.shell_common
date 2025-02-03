@@ -12,9 +12,13 @@ SHELL_NAME=$(basename $SHELL)
 # update PATH
 export PNPM_HOME="/home/naftali/.local/share/pnpm"
 export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
 
 # bat as manpager
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="nvim -R -c 'set ft=man' -c 'map q :q<CR>'"
 
 export CMAKE_GENERATOR=Ninja
 
@@ -48,9 +52,14 @@ if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
 fi
 
 # nvm setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if type fnm &> /dev/null; then
+    eval "$(fnm env --use-on-cd --shell $SHELL_NAME)"
+    source <(fnm completions --shell $SHELL_NAME)
+fi
 
 # mcfly: bash history search tool
 eval "$(mcfly init $SHELL_NAME)"
