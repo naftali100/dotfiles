@@ -88,3 +88,8 @@ fi
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
+
+# Load Angular CLI autocompletion.
+if command -v ng &> /dev/null; then
+    source <(ng completion $SHELL_NAME)
+fi
