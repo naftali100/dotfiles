@@ -10,7 +10,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 SHELL_NAME=$(basename $SHELL)
 
 # update PATH
-export PNPM_HOME="/home/naftali/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
@@ -25,63 +25,66 @@ export CMAKE_GENERATOR=Ninja
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-# oracle cli
-export PATH=/home/naftali/bin:$PATH
-[[ -e "/home/naftali/lib/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/naftali/lib/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh"
 
 ## set rootles docker host
 if [ -f ~/.config/systemd/user/docker.service ]; then
-    export DOCKER_HOST=unix:///run/user/1000/docker.sock
+    # export DOCKER_HOST=unix:///run/user/1000/docker.sock
+    # export DOCKER_CONTEXT=rootless
 fi
 
 #######
 # tools setup
 #######
 
-if command -v ruby >/dev/null 2>&1; then
-    export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-    export PATH="$PATH:$GEM_HOME/bin"
-fi
+# if command -v ruby >/dev/null 2>&1; then
+#     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+#     export PATH="$PATH:$GEM_HOME/bin"
+# fi
 
-if command -v thefuck >/dev/null 2>&1; then
-    eval $(thefuck --alias f)
-fi
+# if command -v thefuck >/dev/null 2>&1; then
+#     eval $(thefuck --alias f)
+# fi
 
-if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+# if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+#     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fi
 
-# nvm setup
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# # nvm setup
+# # export NVM_DIR="$HOME/.nvm"
+# # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-if type fnm &> /dev/null; then
-    eval "$(fnm env --use-on-cd --shell $SHELL_NAME)"
-    source <(fnm completions --shell $SHELL_NAME)
-fi
+# # fnm
+# if type fnm &> /dev/null; then
+#     eval "$(fnm env --use-on-cd --shell $SHELL_NAME)"
+#     source <(fnm completions --shell $SHELL_NAME)
+#     export PATH="$HOME/.local/share/fnm:$PATH"
+# fi
+
 
 # mcfly: bash history search tool
-eval "$(mcfly init $SHELL_NAME)"
+# eval "$(mcfly init $SHELL_NAME)"
 
 if type zoxide &> /dev/null; then
     eval "$(zoxide init $SHELL_NAME)"
 fi
 
-if type kubectl &> /dev/null; then
-  source <(kubectl completion $SHELL_NAME)
-fi
+# if type kubectl &> /dev/null; then
+#   source <(kubectl completion $SHELL_NAME)
+# fi
 
 if type atuin &> /dev/null; then
     eval "$(atuin init $SHELL_NAME)"
 fi
 
-if type pnpm &> /dev/null; then
-    eval "$(pnpm completion $SHELL_NAME)"
-fi
+# if type pnpm &> /dev/null; then
+#     eval "$(pnpm completion $SHELL_NAME)"
+# fi
 
-# bun completions
-[ -s "/home/naftali/.bun/_bun" ] && source "/home/naftali/.bun/_bun"
+# # bun completions
+# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+. "$HOME/.deno/env"
 
 # fix for tilix terminal
 # https://gnunn1.github.io/tilix-web/manual/vteconfig/
@@ -89,7 +92,25 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
 
-# Load Angular CLI autocompletion.
-if command -v ng &> /dev/null; then
-    source <(ng completion $SHELL_NAME)
-fi
+# # Load Angular CLI autocompletion.
+# if command -v ng &> /dev/null; then
+#     source <(ng completion script)
+# fi
+
+# if command -v vagrant >/dev/null 2>&1; then
+#   # >>>> Vagrant command completion (start)
+#   fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.3.7/contrib/$SHELL_NAME $fpath)
+#   compinit
+#   # <<<<  Vagrant command completion (end)
+# fi
+
+autoload -U +X bashcompinit && bashcompinit
+# complete -o nospace -C /usr/bin/terraform terraform
+
+# # check if kubecolor is installed
+# if command -v kubecolor >/dev/null 2>&1; then
+#     alias kubectl="kubecolor"
+#     compdef kubecolor=kubectl
+# fi
+
+# . "$HOME/.cargo/env"

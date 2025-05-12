@@ -107,15 +107,6 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if command -v vagrant >/dev/null 2>&1; then
-  # >>>> Vagrant command completion (start)
-  fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.3.7/contrib/zsh $fpath)
-  compinit
-  # <<<<  Vagrant command completion (end)
-fi
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
 
 ##############
 #
@@ -126,7 +117,7 @@ complete -o nospace -C /usr/bin/terraform terraform
 alias vim="nvim-kick"
 # alias nvim="nvim-kick"
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+alias nvim="NVIM_APPNAME=kickstart nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
 alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
 
@@ -144,9 +135,14 @@ function nvims() {
 
 bindkey -s ^a "nvims\n"
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+PATH=~/.console-ninja/.bin:$PATH
+
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
