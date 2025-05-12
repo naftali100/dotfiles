@@ -125,6 +125,7 @@ alias sudo="sudo "
 
 alias msfconsole="msfconsole --quiet -x \"db_connect ${USER}@msf\""
 
+alias g="git"
 alias gg=ungit
 
 alias top="btop"

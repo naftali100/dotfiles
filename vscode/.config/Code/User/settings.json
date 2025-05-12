@@ -55,8 +55,7 @@
   },
   // window -----------------
   "window.commandCenter": false,
-  "window.titleBarStyle": "custom",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0.9,
   "window.customTitleBarVisibility": "auto",
   // windows ------------- end
   // editor ------------------
@@ -66,7 +65,7 @@
   "editor.cursorBlinking": "smooth",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 5,
-  "editor.fontFamily": "'jetBrainsMono Nerd font', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
+  "editor.fontFamily": "'JetBrainsMono NF', 'jetBrainsMono Nerd font', 'JetBrains Mono', 'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
   "editor.fontLigatures": true,
   "editor.fontSize": 16,
   "editor.formatOnPaste": false,
@@ -141,9 +140,6 @@
   "terminal.integrated.commandsToSkipShell": [
     "cmake.debug"
   ],
-  // terminal ------------- end
-  // workbench -------
-  "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.activityBar.location": "top",
   "workbench.editor.enablePreview": false,
   "workbench.iconTheme": "vscode-great-icons",
@@ -174,6 +170,7 @@
   "git.autoStash": true,
   "git.closeDiffOnOperation": true,
   "git.mergeEditor": true,
+  "git.blame.editorDecoration.enabled": true,
   "github.gitProtocol": "ssh",
   // -------- git end
   //
@@ -330,4 +327,6 @@
     "*.sdb": "${capture}.${extname}-*",
     "*.s3db": "${capture}.${extname}-*"
   },
+  "window.titleBarStyle": "custom",
+  "workbench.colorTheme": "Aura Dark (Soft Text)"
 }
