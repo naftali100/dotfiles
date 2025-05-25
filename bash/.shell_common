@@ -6,6 +6,11 @@ fi
 # ========== 
 # ENV exports
 export EDITOR=vim
+# export MANPAGER="nvim +Man!"
+# if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+#   export MANPAGER="/usr/local/bin/nvr -c 'Man!' -o -"
+# fi
+# export MANPAGER="nvim -c 'set ft=man' -"
 export XDG_CONFIG_HOME="$HOME/.config"
 SHELL_NAME=$(basename $SHELL)
 
