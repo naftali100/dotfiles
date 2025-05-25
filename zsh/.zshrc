@@ -1,3 +1,43 @@
+## Init plugin list and clone if not exist
+# before instant prompt
+
+ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+# Declare an associative array: plugin_name => git_repo_url
+typeset -A OMZ_PLUGINS_TO_INSTALL=(
+  [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
+  # [zsh-syntax-highlighting]="https://github.com/zsh-users/zsh-syntax-highlighting"
+  [fast-syntax-highlighting]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
+  # added below
+  # [zsh-completions]="https://github.com/zsh-users/zsh-completions"
+  # [zsh-autocomplete]="https://github.com/marlonrichert/zsh-autocomplete"
+  [ohmyzsh-full-autoupdate]="https://github.com/Pilaton/OhMyZsh-full-autoupdate"
+  [you-should-use]="https://github.com/MichaelAquilina/zsh-you-should-use"
+  # [colorize]="https://github.com/zpm-zsh/colorize"
+  # [uutils-coreutils]="git@github.com:naftali100/uutils-coreutils-plugin.git"
+)
+
+# Loop through and install if missing
+for plugin in "${(@k)OMZ_PLUGINS_TO_INSTALL}"; do
+  plugin_dir="$ZSH_CUSTOM/plugins/$plugin"
+  if [ ! -d "$plugin_dir" ]; then
+    echo "Installing $plugin from ${OMZ_PLUGINS_TO_INSTALL[$plugin]}..."
+    git clone "${OMZ_PLUGINS_TO_INSTALL[$plugin]}" "$plugin_dir"
+  fi
+done
+
+# Ensure they're all in the plugins list
+for plugin in "${(@k)OMZ_PLUGINS_TO_INSTALL}"; do
+  if ! grep -q "$plugin" <<< "$plugins"; then
+    plugins+=($plugin)
+  fi
+done
+
+plugins+=(git-auto-fetch)
+plugins+=(git)
+# plugins+=(command-not-found)
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -53,15 +93,8 @@ zstyle ':omz:update' frequency 13   # update every 13 days
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git-auto-fetch
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    ohmyzsh-full-autoupdate
-)
 
+# outside of the plugins normal loading as the readme suggest
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
 
