@@ -10,8 +10,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 SHELL_NAME=$(basename $SHELL)
 
 # update PATH
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PATH:$PNPM_HOME:~/.local/bin:~/.cargo/bin"
+export PATH="$PATH:$HOME/.local/share/pnpm"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
@@ -22,8 +21,11 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 export CMAKE_GENERATOR=Ninja
 
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# . "$HOME/.deno/env"
+
+# # bun
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
 
 
 ## set rootles docker host
@@ -84,7 +86,6 @@ fi
 # # bun completions
 # [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-. "$HOME/.deno/env"
 
 # fix for tilix terminal
 # https://gnunn1.github.io/tilix-web/manual/vteconfig/
@@ -112,5 +113,3 @@ autoload -U +X bashcompinit && bashcompinit
 #     alias kubectl="kubecolor"
 #     compdef kubecolor=kubectl
 # fi
-
-# . "$HOME/.cargo/env"

@@ -169,6 +169,7 @@ alias cheat='cheat_command() { curl cheat.sh/"$@"; }; cheat_command'
 
 alias docker-compose="docker compose"
 
+alias "code."="code ."
 
 ##############
 #
@@ -179,7 +180,7 @@ alias docker-compose="docker compose"
 alias vim="nvim"
 # alias nvim="nvim-kick"
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim="NVIM_APPNAME=kickstart nvim"
+alias nvim="NVIM_APPNAME=kickstart_new nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
 alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
 
