@@ -1,6 +1,12 @@
 # Path to your oh-my-zsh installation.
-
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+# Install Oh My Zsh if it doesn't exist
+if [ ! -d "$ZSH" ]; then
+  echo "Oh My Zsh not found, installing..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 ## Init plugin list and clone if not exist before instant prompt
 
@@ -59,7 +65,6 @@ fi
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
-export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -112,13 +117,6 @@ PYTHON_AUTO_VRUN=true
 # outside of the plugins normal loading as the readme suggest
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
-
-
-# Install Oh My Zsh if it doesn't exist
-if [ ! -d "$ZSH" ]; then
-  echo "Oh My Zsh not found, installing..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
 
 source $ZSH/oh-my-zsh.sh
 
