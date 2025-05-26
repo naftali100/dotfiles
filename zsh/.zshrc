@@ -1,7 +1,15 @@
-## Init plugin list and clone if not exist
-# before instant prompt
-
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+# Clone Oh My Zsh if it doesn't exist
+if [ ! -d "$ZSH" ]; then
+  echo "Oh My Zsh not found, installing..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+
+## Init plugin list and clone if not exist before instant prompt
 
 # Declare an associative array: plugin_name => git_repo_url
 typeset -A OMZ_PLUGINS_TO_INSTALL=(
@@ -33,9 +41,19 @@ for plugin in "${(@k)OMZ_PLUGINS_TO_INSTALL}"; do
   fi
 done
 
-plugins+=(git-auto-fetch)
-plugins+=(git)
-# plugins+=(command-not-found)
+
+plugins+=(
+  fzf 
+  git-commit # add git commit with prefix
+  git-auto-fetch 
+  git
+  git-escape-magic
+  safe-paste
+  ssh # hosts completion from config file
+  dotenv
+  python # auto activate venv
+  # command-not-found
+)
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -48,8 +66,6 @@ fi
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -92,6 +108,11 @@ zstyle ':omz:update' frequency 13   # update every 13 days
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
+
+# python plugin configs
+PYTHON_VENV_NAME=".venv"
+PYTHON_VENV_NAMES=($PYTHON_VENV_NAME venv)
+PYTHON_AUTO_VRUN=true
 
 
 # outside of the plugins normal loading as the readme suggest
@@ -143,7 +164,9 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-timezsh() {
-  shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
-}
+# autoload -Uz url-quote-magic
+# zle -N self-insert url-quote-magic
+
+# autoload -U url-quote-magic bracketed-paste-magic
+# zle -N self-insert url-quote-magic
+# zle -N bracketed-paste bracketed-paste-magic
