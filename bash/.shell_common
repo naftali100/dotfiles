@@ -120,3 +120,8 @@ autoload -U +X bashcompinit && bashcompinit
 #     alias kubectl="kubecolor"
 #     compdef kubecolor=kubectl
 # fi
+
+# fzf
+if command -v fzf >/dev/null 2>&1; then
+    eval "$(fzf --$SHELL_NAME)"
+fi

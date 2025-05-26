@@ -22,6 +22,7 @@ typeset -A OMZ_PLUGINS_TO_INSTALL=(
   [you-should-use]="https://github.com/MichaelAquilina/zsh-you-should-use"
   # [colorize]="https://github.com/zpm-zsh/colorize"
   # [uutils-coreutils]="git@github.com:naftali100/uutils-coreutils-plugin.git"
+  [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
 )
 
 # Loop through and install if missing
