@@ -6,6 +6,8 @@ fi
 # ========== 
 # ENV exports
 export EDITOR=vim
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 # export MANPAGER="nvim +Man!"
 # if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
 #   export MANPAGER="/usr/local/bin/nvr -c 'Man!' -o -"
