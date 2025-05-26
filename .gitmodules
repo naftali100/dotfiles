@@ -3,4 +3,4 @@
 	url = git@github.com:naftali100/kickstart.nvim.git
 [submodule "nvim/.config/kickstart_new"]
 	path = nvim/.config/kickstart_new
-	url = git@github.com:naftali100/kickstart-new.nvim.git
+	url = https://github.com/naftali100/kickstart-new.nvim.git
