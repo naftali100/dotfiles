@@ -52,6 +52,7 @@ plugins+=(
   ssh # hosts completion from config file
   dotenv
   python # auto activate venv
+  zoxide # load zoxide
   # command-not-found
 )
 

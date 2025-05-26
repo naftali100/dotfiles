@@ -74,9 +74,6 @@ fi
 # mcfly: bash history search tool
 # eval "$(mcfly init $SHELL_NAME)"
 
-if type zoxide &> /dev/null; then
-    eval "$(zoxide init $SHELL_NAME)"
-fi
 
 # if type kubectl &> /dev/null; then
 #   source <(kubectl completion $SHELL_NAME)
