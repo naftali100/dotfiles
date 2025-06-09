@@ -171,3 +171,11 @@ fi
 # autoload -U url-quote-magic bracketed-paste-magic
 # zle -N self-insert url-quote-magic
 # zle -N bracketed-paste bracketed-paste-magic
+
+# pnpm
+export PNPM_HOME="/home/naftali/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

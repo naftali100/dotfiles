@@ -31,8 +31,8 @@ export CMAKE_GENERATOR=Ninja
 # . "$HOME/.deno/env"
 
 # # bun
-# export BUN_INSTALL="$HOME/.bun"
-# export PATH="$BUN_INSTALL/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 
 ## set rootles docker host
@@ -83,12 +83,12 @@ if type atuin &> /dev/null; then
     eval "$(atuin init $SHELL_NAME)"
 fi
 
-# if type pnpm &> /dev/null; then
-#     eval "$(pnpm completion $SHELL_NAME)"
-# fi
+if type pnpm &> /dev/null; then
+    eval "$(pnpm completion $SHELL_NAME)"
+fi
 
 # # bun completions
-# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 
 # fix for tilix terminal
