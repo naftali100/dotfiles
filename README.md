@@ -1,5 +1,14 @@
 ## my dotfiles
 
+### Requirements
+
+- ripgrep
+- fd
+- neovim
+- lua (for nvim)
+- python
+- dev packages 
+
 ### Usage
 I  use [gnu stow](https://www.gnu.org/software/stow/) to symlink the files to home folder.
 
@@ -14,13 +23,13 @@ by default dotfiles will stow to `~` folder
 
 you can change this in .stowrc file or by passing `--target` argument
 
-### System
+### System Info
 - OS: fedora
 - global theme: [catppuccin](https://catppuccin.com/)
 - shell: zsh
 - shell theme: p10k
 - zsh package manager: omz
-- terminal: Tilix
+- terminal emulator: Tilix
 - editor: vscode
 - launcher: ulauncher
 - font: JetBrainsMono
