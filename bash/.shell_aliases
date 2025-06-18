@@ -150,6 +150,7 @@ alias docker-compose="docker compose"
 
 alias "code."="code ."
 
+alias ":q"="exit"
 ##############
 #
 # nvim switcher 

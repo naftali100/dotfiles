@@ -1,0 +1,14 @@
+tlp/tlp-ui
+coreutils
+rust
+stow
+ripgrep
+fd
+neovim
+docker
+cargo
+lua
+python
+zoxide
+tldr
+atuin
