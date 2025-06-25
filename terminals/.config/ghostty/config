@@ -42,7 +42,7 @@ font-family = JetBrainsMono Nerd Font
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = catppuccin-mocha
+theme = catppuccin-mocha.conf
 gtk-single-instance = true
 command = tmux
 # window-decoration = server
