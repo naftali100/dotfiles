@@ -8,9 +8,9 @@
 [global]
 
 [alias]
-    mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
-		# create new tag with the next patch version
-		auto-tag = "!f() { \\\n  git fetch --tags && \\\n  latest=$(git describe --tags --abbrev=0 2>/dev/null || echo \"v0.0.0\"); \\\n  IFS=. read -r major minor patch <<<\"${latest//v/}\"; \\\n  patch=$((patch + 1)); \\\n  new_tag=\"v$major.$minor.$patch\"; \\\n  git tag -a \"$new_tag\" -m \"Release $new_tag\" && \\\n  git push origin \"$new_tag\" && \\\n  echo \"Created and pushed new tag: $new_tag\"; \\\n}; f"
+	mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	# create new tag with the next patch version
+	auto-tag = "!f() { \\\n  git fetch --tags && \\\n  latest=$(git describe --tags --abbrev=0 2>/dev/null || echo \"v0.0.0\"); \\\n  IFS=. read -r major minor patch <<<\"${latest//v/}\"; \\\n  patch=$((patch + 1)); \\\n  new_tag=\"v$major.$minor.$patch\"; \\\n  git tag -a \"$new_tag\" -m \"Release $new_tag\" && \\\n  git push origin \"$new_tag\" && \\\n  echo \"Created and pushed new tag: $new_tag\"; \\\n}; f"
 	build = "!a() {\nlocal _scope _attention _message\nwhile [ $# -ne 0 ]; do\ncase $1 in\n  -s | --scope )\n    if [ -z $2 ]; then\n      echo \"Missing scope!\"\n      return 1\n    fi\n    _scope=\"$2\"\n    shift 2\n    ;;\n  -a | --attention )\n    _attention=\"!\"\n    shift 1\n    ;;\n  * )\n    _message=\"${_message} $1\"\n    shift 1\n    ;;\nesac\ndone\ngit commit -m \"build${_scope:+(${_scope})}${_attention}:${_message}\"\n}; a"
 	chore = "!a() {\nlocal _scope _attention _message\nwhile [ $# -ne 0 ]; do\ncase $1 in\n  -s | --scope )\n    if [ -z $2 ]; then\n      echo \"Missing scope!\"\n      return 1\n    fi\n    _scope=\"$2\"\n    shift 2\n    ;;\n  -a | --attention )\n    _attention=\"!\"\n    shift 1\n    ;;\n  * )\n    _message=\"${_message} $1\"\n    shift 1\n    ;;\nesac\ndone\ngit commit -m \"chore${_scope:+(${_scope})}${_attention}:${_message}\"\n}; a"
 	ci = "!a() {\nlocal _scope _attention _message\nwhile [ $# -ne 0 ]; do\ncase $1 in\n  -s | --scope )\n    if [ -z $2 ]; then\n      echo \"Missing scope!\"\n      return 1\n    fi\n    _scope=\"$2\"\n    shift 2\n    ;;\n  -a | --attention )\n    _attention=\"!\"\n    shift 1\n    ;;\n  * )\n    _message=\"${_message} $1\"\n    shift 1\n    ;;\nesac\ndone\ngit commit -m \"ci${_scope:+(${_scope})}${_attention}:${_message}\"\n}; a"
@@ -31,4 +31,6 @@
 	aiAnthropicKeyOption = butlerAPI
 	aiAnthropicModelName = claude-3-haiku-20240307
 [oh-my-zsh]
-	git-commit-alias = 788eaa5930eeafceb0cc43f338b0bacf7a2e36a8
+	git-commit-alias = cb72d7dcbf08b435c7f8a6470802b207b2aa02c3
+[core]
+	excludesFile = ~/.gitignore
