@@ -47,6 +47,8 @@ Desktop.ini
 .env
 .env*
 
+# Dependencies #
+################
 node_packages
 .venv
 venv
