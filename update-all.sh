@@ -29,24 +29,36 @@ if command -v dnf &>/dev/null; then
     dnf upgrade
 fi
 
-echo "Updating Vim/Neovim plugins..."
+# update cargo packages
+if command -v cargo &>/dev/null; then
+    echo "Updating Cargo packages..."
+    cargo update
+fi
+
 if command -v nvim &>/dev/null; then
+    echo "Updating Vim/Neovim plugins..."
     nvim --headless -c "MasonUpdate" -c "qall"
     nvim --headless "+Lazy! sync" +qa
 fi
 
-echo "Updating Tmux plugins..."
+# Update vscode extensions
+if command -v code &>/dev/null; then
+    echo "Updating VSCode extensions..."
+    code --update-extensions
+fi
+
 if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "Updating Tmux plugins..."
     "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
 fi
 
-echo "Updating Oh My Zsh..."
 if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo "Updating Oh My Zsh..."
     omz update
 fi
 
-echo "Updating dotfiles repository..."
 if [ -d "$HOME/dotfiles" ]; then
+    echo "Updating dotfiles repository..."
     cd "$HOME/dotfiles"
     git pull --rebase
     git submodule update --init --recursive
