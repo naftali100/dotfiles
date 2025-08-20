@@ -1,0 +1,163 @@
+---
+- name: Cross-platform Development Tools Installation
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  become: yes
+
+  vars:
+    debian_packages:
+      - stow
+      - ripgrep
+      - fd-find
+      - neovim
+      - python3
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua5.3
+      - tlp
+      - build-essential
+      - fzf
+    arch_packages:
+      - stow
+      - ripgrep
+      - fd
+      - neovim
+      - python
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - tlp
+      - tlpui
+      - base-devel
+      - fzf
+    fedora_packages:
+      - stow
+      - ripgrep
+      - fd-find
+      - neovim
+      - python3
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - tlp
+      - tlp-rdw
+      - '@development-tools'
+      - fzf
+    macos_packages:
+      - stow
+      - ripgrep
+      - fd
+      - neovim
+      - python
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - fzf
+    termux_packages:
+      - stow
+      - ripgrep
+      - fd
+      - neovim
+      - python
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - fzf
+
+  tasks:
+    - name: Install packages on Debian/Ubuntu
+      ansible.builtin.apt:
+        name: "{{ debian_packages }}"
+        state: present
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Check if yay is already installed
+      ansible.builtin.command: which yay
+      register: yay_installed
+      failed_when: false
+      changed_when: false
+      when: ansible_facts['os_family'] == "Archlinux"
+
+    - name: Install yay on Arch Linux
+      ansible.builtin.shell: |
+        sudo pacman -S --needed --noconfirm git base-devel && \
+        git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && \
+        cd /tmp/yay-bin && \
+        makepkg -si --noconfirm
+      become: no
+      when: ansible_facts['os_family'] == "Archlinux" and yay_installed.rc != 0
+
+    - name: Install packages on Arch Linux using yay
+      ansible.builtin.shell: |
+        yay -S --noconfirm {{ item }}
+      loop: "{{ arch_packages }}"
+      when: ansible_facts['os_family'] == "Archlinux"
+
+    - name: Install packages on Fedora
+      ansible.builtin.dnf:
+        name: "{{ fedora_packages }}"
+        state: present
+        update_cache: yes
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Install packages on macOS
+      community.general.homebrew:
+        name: "{{ macos_packages }}"
+        state: present
+        update_homebrew: yes
+      when: ansible_facts['os_family'] == "Darwin"
+
+    - name: Install Xcode Command Line Tools on macOS
+      ansible.builtin.command: xcode-select --install
+      args:
+        creates: /Library/Developer/CommandLineTools
+      when: ansible_facts['os_family'] == "Darwin"
+
+    - name: Install packages on Termux
+      ansible.builtin.apt:
+        name: "{{ termux_packages }}"
+        state: present
+        update_cache: yes
+      when: ansible_facts['distribution'] == "Termux"
+
+    # - name: Install Rust using rustup
+    #   ansible.builtin.shell: |
+    #     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    #   args:
+    #     creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+    #   when: ansible_facts['os_family'] in ["Debian", "Archlinux", "RedHat", "Darwin"] or ansible_facts['distribution'] == "Termux"
+
+    # - name: Ensure cargo is in PATH
+    #   ansible.builtin.shell: |
+    #     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+    #   args:
+    #     executable: /bin/bash
+    #   when: ansible_facts['os_family'] != "Darwin"
+
+    # - name: Install cargo packages
+    #   community.general.cargo:
+    #     name:
+    #       - cargo
+    #   when: ansible_facts['os_family'] in ["Debian", "Archlinux", "RedHat", "Darwin"] or ansible_facts['distribution'] == "Termux"
