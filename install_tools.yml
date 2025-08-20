@@ -21,6 +21,7 @@
       - lua5.3
       - tlp
       - build-essential
+      - fzf
     arch_packages:
       - stow
       - ripgrep
@@ -35,8 +36,9 @@
       - coreutils
       - lua
       - tlp
-      - tlp-ui
+      - tlpui
       - base-devel
+      - fzf
     fedora_packages:
       - stow
       - ripgrep
@@ -53,6 +55,7 @@
       - tlp
       - tlp-rdw
       - '@development-tools'
+      - fzf
     macos_packages:
       - stow
       - ripgrep
@@ -66,6 +69,7 @@
       - tmux
       - coreutils
       - lua
+      - fzf
     termux_packages:
       - stow
       - ripgrep
@@ -79,6 +83,7 @@
       - tmux
       - coreutils
       - lua
+      - fzf
 
   tasks:
     - name: Install packages on Debian/Ubuntu
@@ -88,11 +93,26 @@
         update_cache: yes
       when: ansible_facts['os_family'] == "Debian"
 
-    - name: Install packages on Arch Linux
-      community.general.pacman:
-        name: "{{ arch_packages }}"
-        state: present
-        update_cache: yes
+    - name: Check if yay is already installed
+      ansible.builtin.command: which yay
+      register: yay_installed
+      failed_when: false
+      changed_when: false
+      when: ansible_facts['os_family'] == "Archlinux"
+
+    - name: Install yay on Arch Linux
+      ansible.builtin.shell: |
+        sudo pacman -S --needed --noconfirm git base-devel && \
+        git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && \
+        cd /tmp/yay-bin && \
+        makepkg -si --noconfirm
+      become: no
+      when: ansible_facts['os_family'] == "Archlinux" and yay_installed.rc != 0
+
+    - name: Install packages on Arch Linux using yay
+      ansible.builtin.shell: |
+        yay -S --noconfirm {{ item }}
+      loop: "{{ arch_packages }}"
       when: ansible_facts['os_family'] == "Archlinux"
 
     - name: Install packages on Fedora
