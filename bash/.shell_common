@@ -17,10 +17,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 SHELL_NAME=$(basename $SHELL)
 
 # update PATH
-export PATH="$PATH:$HOME/.local/share/pnpm"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
-
 
 # bat as manpager
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -40,6 +38,10 @@ if [ -f ~/.config/systemd/user/docker.service ]; then
     # export DOCKER_HOST=unix:///run/user/1000/docker.sock
     # export DOCKER_CONTEXT=rootless
 fi
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 
 #######
 # tools setup
@@ -64,10 +66,11 @@ fi
 # # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # fnm
-if type fnm &> /dev/null; then
-    eval "$(fnm env --use-on-cd --shell $SHELL_NAME)"
-    source <(fnm completions --shell $SHELL_NAME)
-    export PATH="$HOME/.local/share/fnm:$PATH"
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+  source <(fnm completions --shell $SHELL_NAME)
 fi
 
 
@@ -83,9 +86,18 @@ if type atuin &> /dev/null; then
     eval "$(atuin init $SHELL_NAME)"
 fi
 
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 if type pnpm &> /dev/null; then
     eval "$(pnpm completion $SHELL_NAME)"
 fi
+
 
 # # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
@@ -126,6 +138,3 @@ fi
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
-
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
