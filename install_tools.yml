@@ -5,6 +5,8 @@
   gather_facts: yes
   become: yes
 
+  # TODO: add bat, eza
+
   vars:
     debian_packages:
       - stow
@@ -35,10 +37,14 @@
       - tmux
       - coreutils
       - lua
-      - tlp
-      - tlpui
+      # - tlp
+      # - tlpui
       - base-devel
       - fzf
+      - rustup
+      - unzip
+      - bat
+      - eza
     fedora_packages:
       - stow
       - ripgrep
