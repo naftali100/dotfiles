@@ -128,16 +128,6 @@ source $ZSH/oh-my-zsh.sh
 GIT_AUTO_FETCH_INTERVAL=3600 # in seconds
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -174,7 +164,7 @@ fi
 # zle -N bracketed-paste bracketed-paste-magic
 
 # pnpm
-export PNPM_HOME="/home/naftali/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
