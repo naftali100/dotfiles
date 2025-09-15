@@ -92,7 +92,7 @@ alias cls="clear"
 
 alias tf='tail -f'
 
-alias ls=ranger
+alias ls=l
 alias exa='eza --icons --git' # the new maintained exa
 alias l='exa -la'   # show long listing
 alias ll='exa -Tla' # show tree of all files

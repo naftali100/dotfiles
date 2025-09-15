@@ -141,3 +141,8 @@ fi
 
 
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# check if .private_aliases
+if [ -f ~/.private_aliases ]; then
+    . ~/.private_aliases
+fi
