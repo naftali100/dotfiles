@@ -142,7 +142,7 @@ alias work="code ~/Documents/program/quicker-app"
 
 # TODO: handle * in selected branch
 alias bb="git branch -a --sort=-committerdate | sed 's/remotes\/origin\///' | sort | uniq | fzf --height=20% | xargs git switch "
-alias gpull='git stash && git pull && git stash pop'
+alias gpull='git stash && git pull --rebase && git stash pop'
 
 alias cheat='cheat_command() { curl cheat.sh/"$@"; }; cheat_command'
 
