@@ -54,6 +54,7 @@ plugins+=(
   dotenv
   python # auto activate venv
   zoxide # load zoxide
+  golang
   # command-not-found
 )
 
