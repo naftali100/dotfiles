@@ -55,6 +55,7 @@ plugins+=(
   python # auto activate venv
   zoxide # load zoxide
   golang
+  kubectl # kubectl completion
   # command-not-found
 )
 
