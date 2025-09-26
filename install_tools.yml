@@ -24,6 +24,7 @@
       - tlp
       - build-essential
       - fzf
+      - yq
     arch_packages:
       - stow
       - ripgrep
@@ -45,6 +46,7 @@
       - unzip
       - bat
       - eza
+      - yq
     fedora_packages:
       - stow
       - ripgrep
@@ -62,6 +64,7 @@
       - tlp-rdw
       - '@development-tools'
       - fzf
+      - yq
     macos_packages:
       - stow
       - ripgrep
@@ -76,6 +79,7 @@
       - coreutils
       - lua
       - fzf
+      - yq
     termux_packages:
       - stow
       - ripgrep
@@ -90,7 +94,7 @@
       - coreutils
       - lua
       - fzf
-
+      - yq
   tasks:
     - name: Install packages on Debian/Ubuntu
       ansible.builtin.apt:

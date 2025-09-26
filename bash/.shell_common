@@ -140,7 +140,7 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 
-export PATH=$PATH:$(go env GOPATH)/bin
+# export PATH=$PATH:$(go env GOPATH)/bin
 
 # check if .private_aliases
 if [ -f ~/.private_aliases ]; then

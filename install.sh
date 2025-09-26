@@ -51,7 +51,7 @@ install_ansible() {
                     debian|ubuntu)
                         install_ansible_debian
                         ;;
-                    arch)
+                    arch|endeavouros)
                         install_ansible_arch
                         ;;
                     fedora)
