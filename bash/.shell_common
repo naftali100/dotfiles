@@ -3,8 +3,10 @@ if [ -f ~/.shell_aliases ]; then
     . ~/.shell_aliases
 fi
 
-# ========== 
+#############
 # ENV exports
+#############
+
 export EDITOR=vim
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
@@ -16,21 +18,19 @@ export MANROFFOPT="-c"
 export XDG_CONFIG_HOME="$HOME/.config"
 SHELL_NAME=$(basename $SHELL)
 
-# update PATH
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PATH="$HOME/.config/composer/vendor/bin:$PATH"
-
 # bat as manpager
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # export MANPAGER="nvim -R -c 'set ft=man' -c 'map q :q<CR>'"
 
 export CMAKE_GENERATOR=Ninja
 
-# . "$HOME/.deno/env"
+# composer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
 # # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$PATH:$BUN_INSTALL/bin"
 
 
 ## set rootles docker host
@@ -42,10 +42,9 @@ fi
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-
-#######
+#############
 # tools setup
-#######
+#############
 
 # if command -v ruby >/dev/null 2>&1; then
 #     export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
@@ -68,7 +67,7 @@ export LC_ALL=en_US.UTF-8
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
+  export PATH="$PATH:$FNM_PATH"
   eval "`fnm env`"
   source <(fnm completions --shell $SHELL_NAME)
 fi
@@ -91,7 +90,7 @@ fi
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *) export PATH="$PATH:$PNPM_HOME" ;;
 esac
 
 if type pnpm &> /dev/null; then
