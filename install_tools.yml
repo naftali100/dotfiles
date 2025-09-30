@@ -47,6 +47,7 @@
       - bat
       - eza
       - yq
+      - pipx
     fedora_packages:
       - stow
       - ripgrep
@@ -65,6 +66,7 @@
       - '@development-tools'
       - fzf
       - yq
+      - pipx
     macos_packages:
       - stow
       - ripgrep
@@ -96,6 +98,13 @@
       - fzf
       - yq
   tasks:
+    - name: Ensure community.general collection is installed
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install community.general
+      changed_when: false
+      check_mode: no
+
+    # ubuntu
     - name: Install packages on Debian/Ubuntu
       ansible.builtin.apt:
         name: "{{ debian_packages }}"
@@ -103,6 +112,7 @@
         update_cache: yes
       when: ansible_facts['os_family'] == "Debian"
 
+    # arch
     - name: Check if yay is already installed
       ansible.builtin.command: which yay
       register: yay_installed
@@ -119,12 +129,15 @@
       become: no
       when: ansible_facts['os_family'] == "Archlinux" and yay_installed.rc != 0
 
-    - name: Install packages on Arch Linux using yay
-      ansible.builtin.shell: |
-        yay -S --noconfirm {{ item }}
-      loop: "{{ arch_packages }}"
+    - name: Install packages on Arch Linux using aur module
+      community.general.aur:
+        name: "{{ arch_packages }}"
+        state: present
+        update_cache: yes
+        use_yay: yes
       when: ansible_facts['os_family'] == "Archlinux"
 
+    # fedora
     - name: Install packages on Fedora
       ansible.builtin.dnf:
         name: "{{ fedora_packages }}"
@@ -132,6 +145,7 @@
         update_cache: yes
       when: ansible_facts['os_family'] == "RedHat"
 
+    # macos
     - name: Install packages on macOS
       community.general.homebrew:
         name: "{{ macos_packages }}"
@@ -145,12 +159,26 @@
         creates: /Library/Developer/CommandLineTools
       when: ansible_facts['os_family'] == "Darwin"
 
+    # termux
     - name: Install packages on Termux
       ansible.builtin.apt:
         name: "{{ termux_packages }}"
         state: present
         update_cache: yes
       when: ansible_facts['distribution'] == "Termux"
+
+
+    # general tools
+    - name: Gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Install gnome-extensions-cli using pipx
+      community.general.pipx:
+        name: gnome-extensions-cli
+        state: present
+        system_site_packages: true
+      become: no
 
     # - name: Install Rust using rustup
     #   ansible.builtin.shell: |
