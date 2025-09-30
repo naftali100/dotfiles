@@ -1,0 +1,12 @@
+appindicatorsupport@rgcjonas.gmail.com
+auto-move-windows@gnome-shell-extensions.gcampax.github.com
+blur-my-shell@aunetx
+clipboard-history@alexsaveau.dev
+custom-hot-corners-extended@G-dH.github.com
+dash-to-dock@micxgx.gmail.com
+just-perfection-desktop@just-perfection
+lockkeys@vaina.lt
+lockscreen-extension@pratap.fastmail.fm
+netspeedsimplified@prateekmedia.extension
+top-bar-organizer@julian.gse.jsts.xyz
+Vitals@CoreCoding.com
