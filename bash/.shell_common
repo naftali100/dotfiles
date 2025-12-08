@@ -145,3 +145,5 @@ fi
 if [ -f ~/.private_aliases ]; then
     . ~/.private_aliases
 fi
+
+alias crontab='crontab -i'
