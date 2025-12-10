@@ -44,5 +44,5 @@ font-family = JetBrainsMono Nerd Font
 
 theme = catppuccin-mocha.conf
 gtk-single-instance = true
-command = tmux
+command = LANG=en_US.UTF-8 LANGUAGE=en_US:en tmux
 # window-decoration = server
