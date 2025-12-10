@@ -47,7 +47,8 @@
       - bat
       - eza
       - yq
-      - pipx
+      - python-pipx
+      - getnf
     fedora_packages:
       - stow
       - ripgrep
