@@ -113,7 +113,9 @@
         update_cache: yes
       when: ansible_facts['os_family'] == "Debian"
 
+    ######
     # arch
+    ######
     - name: Check if yay is already installed
       ansible.builtin.command: which yay
       register: yay_installed
@@ -130,13 +132,32 @@
       become: no
       when: ansible_facts['os_family'] == "Archlinux" and yay_installed.rc != 0
 
+    - name: Create the `aur_builder` user
+      become: yes
+      ansible.builtin.user:
+        name: aur_builder
+        create_home: yes
+        group: wheel
+      when: ansible_facts['os_family'] == "Archlinux"
+    
+    - name: Allow the `aur_builder` user to run `sudo pacman` without a password
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        create: yes
+        mode: 0644
+        validate: 'visudo -cf %s'
+      when: ansible_facts['os_family'] == "Archlinux"
+    
     - name: Install packages on Arch Linux using aur module
-      community.general.aur:
+      kewlfft.aur.aur:
+        use: yay
         name: "{{ arch_packages }}"
         state: present
-        update_cache: yes
-        use_yay: yes
       when: ansible_facts['os_family'] == "Archlinux"
+      become: yes
+      become_user: aur_builder
 
     # fedora
     - name: Install packages on Fedora
