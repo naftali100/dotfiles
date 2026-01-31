@@ -6,34 +6,39 @@ echo "Updating system packages..."
 
 # Update system packages (Debian/Ubuntu)
 if command -v apt-get &>/dev/null; then
+    echo "Updating APT packages..."
     sudo apt-get update && sudo apt-get upgrade -y
 fi
 
 # Update system packages (Arch Linux)
 if command -v pacman &>/dev/null; then
+    echo "Updating Pacman packages..."
     sudo pacman -Syu --noconfirm
 fi
 
 # Update Homebrew (macOS/Linux)
 if command -v brew &>/dev/null; then
+    echo "Updating Homebrew packages..."
     brew update && brew upgrade
 fi
 
 # Update Flatpak
 if command -v flatpak &>/dev/null; then
+    echo "Updating Flatpak packages..."
     flatpak update
 fi
 
 # Update dnf
 if command -v dnf &>/dev/null; then
-    dnf upgrade
+    echo "Updating DNF packages..."
+    sudo dnf upgrade
 fi
 
 # update cargo packages
-if command -v cargo &>/dev/null; then
-    echo "Updating Cargo packages..."
-    cargo update
-fi
+# if command -v cargo &>/dev/null; then
+#     echo "Updating Cargo packages..."
+#     cargo update
+# fi
 
 if command -v nvim &>/dev/null; then
     echo "Updating Vim/Neovim plugins..."

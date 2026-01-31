@@ -80,7 +80,7 @@
   "editor.inlineSuggest.enabled": true,
   "editor.letterSpacing": 0.1,
   "editor.linkedEditing": true,
-  "editor.minimap.autohide": false,
+  "editor.minimap.autohide": "none",
   "editor.minimap.renderCharacters": false,
   "editor.minimap.scale": 1,
   "editor.peekWidgetDefaultFocus": "editor",
