@@ -1,0 +1,24 @@
+---
+# Debian/Ubuntu specific installation tasks
+- name: Install packages on Debian/Ubuntu
+  ansible.builtin.apt:
+    name:
+      - stow
+      - ripgrep
+      - fd-find
+      - neovim
+      - python3
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua5.3
+      - tlp
+      - build-essential
+      - fzf
+      - yq
+    state: present
+    update_cache: yes
+  become: yes

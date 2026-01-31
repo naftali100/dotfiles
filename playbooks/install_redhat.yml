@@ -1,0 +1,26 @@
+---
+# Fedora/RedHat specific installation tasks
+- name: Install packages on Fedora
+  ansible.builtin.dnf:
+    name:
+      - stow
+      - ripgrep
+      - fd-find
+      - neovim
+      - python3
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - tlp
+      - tlp-rdw
+      - "@development-tools"
+      - fzf
+      - yq
+      - pipx
+    state: present
+    update_cache: yes
+  become: yes

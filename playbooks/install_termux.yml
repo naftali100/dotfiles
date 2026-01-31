@@ -1,0 +1,22 @@
+---
+# Termux specific installation tasks
+- name: Install packages on Termux
+  ansible.builtin.apt:
+    name:
+      - stow
+      - ripgrep
+      - fd
+      - neovim
+      - python
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - fzf
+      - yq
+    state: present
+    update_cache: yes
+  become: yes

@@ -1,0 +1,61 @@
+---
+# Arch Linux specific installation tasks
+- name: Check if yay is already installed
+  ansible.builtin.command: which yay
+  register: yay_installed
+  failed_when: false
+  changed_when: false
+
+- name: Install yay on Arch Linux
+  ansible.builtin.shell: |
+    sudo pacman -S --needed --noconfirm git base-devel && \
+    git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && \
+    cd /tmp/yay-bin && \
+    makepkg -si --noconfirm
+  become: no
+  when: yay_installed.rc != 0
+
+- name: Create the `aur_builder` user
+  ansible.builtin.user:
+    name: aur_builder
+    create_home: yes
+    group: wheel
+  become: yes
+
+- name: Allow the `aur_builder` user to run `sudo pacman` without a password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    mode: 0644
+    validate: "visudo -cf %s"
+  become: yes
+
+- name: Install packages on Arch Linux using aur module
+  kewlfft.aur.aur:
+    use: yay
+    name:
+      - stow
+      - ripgrep
+      - fd
+      - neovim
+      - python
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - base-devel
+      - fzf
+      - rustup
+      - unzip
+      - bat
+      - eza
+      - yq
+      - python-pipx
+      - getnf
+    state: present
+  become: yes
+  become_user: aur_builder

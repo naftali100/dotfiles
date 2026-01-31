@@ -1,0 +1,27 @@
+---
+- name: Cross-platform Development Tools Installation
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: false
+
+  tasks:
+    - name: Ensure required Ansible collections are installed
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install {{ item }} --force
+      loop:
+        - community.general
+        - kewlfft.aur
+      changed_when: false
+      check_mode: no
+
+    - name: Include OS-specific installation tasks
+      ansible.builtin.include_tasks: "{{ item }}"
+      with_first_found:
+        - files:
+            - "install_{{ ansible_facts['distribution'] | lower }}.yml"
+            - "install_{{ ansible_facts['os_family'] | lower }}.yml"
+          skip: true
+
+    - name: Include common tasks
+      ansible.builtin.include_tasks: install_common.yml

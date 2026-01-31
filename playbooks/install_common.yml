@@ -1,0 +1,33 @@
+---
+# Common tasks that run on all platforms
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Install gnome-extensions-cli using pipx
+  community.general.pipx:
+    name: gnome-extensions-cli
+    state: present
+    system_site_packages: true
+  become: no
+
+# Uncomment and customize these tasks if needed:
+# - name: Install Rust using rustup
+#   ansible.builtin.shell: |
+#     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+#   when: ansible_facts['os_family'] in ["Debian", "Archlinux", "RedHat", "Darwin"] or ansible_facts['distribution'] == "Termux"
+
+# - name: Ensure cargo is in PATH
+#   ansible.builtin.shell: |
+#     echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+#   args:
+#     executable: /bin/bash
+#   when: ansible_facts['os_family'] != "Darwin"
+
+# - name: Install cargo packages
+#   community.general.cargo:
+#     name:
+#       - cargo
+#   when: ansible_facts['os_family'] in ["Debian", "Archlinux", "RedHat", "Darwin"] or ansible_facts['distribution'] == "Termux"

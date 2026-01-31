@@ -1,0 +1,26 @@
+---
+# macOS specific installation tasks
+- name: Install packages on macOS
+  community.general.homebrew:
+    name:
+      - stow
+      - ripgrep
+      - fd
+      - neovim
+      - python
+      - zoxide
+      - tldr
+      - atuin
+      - zsh
+      - tmux
+      - coreutils
+      - lua
+      - fzf
+      - yq
+    state: present
+    update_homebrew: yes
+
+- name: Install Xcode Command Line Tools on macOS
+  ansible.builtin.command: xcode-select --install
+  args:
+    creates: /Library/Developer/CommandLineTools

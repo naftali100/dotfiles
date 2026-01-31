@@ -2,7 +2,7 @@
 
 set -e
 
-PLAYBOOK="install_tools.yml"
+PLAYBOOK="playbooks/install_tools.yml"
 
 # Function to install Ansible on Debian/Ubuntu
 install_ansible_debian() {
