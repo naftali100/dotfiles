@@ -4,13 +4,57 @@
   ansible.builtin.package_facts:
     manager: auto
 
+# GNOME Desktop Environment Setup
+- name: Check if GNOME is running
+  ansible.builtin.shell: echo $XDG_CURRENT_DESKTOP
+  register: current_desktop
+  changed_when: false
+  failed_when: false
+
+- name: Read GNOME extensions list
+  ansible.builtin.slurp:
+    src: "{{ playbook_dir }}/../gnome/ext-list.txt"
+  register: extensions_file
+  when: "'GNOME' in current_desktop.stdout"
+
 - name: Install gnome-extensions-cli using pipx
   community.general.pipx:
     name: gnome-extensions-cli
     state: present
     system_site_packages: true
+  when: "'GNOME' in current_desktop.stdout"
   become: no
 
+- name: Install GNOME extensions from ext-list.txt
+  ansible.builtin.shell: |
+    export PATH="$HOME/.local/bin:$PATH"
+    gext install {{ item }}
+  loop: "{{ (extensions_file['content'] | b64decode).split('\n') | select('match', '^[^#].*') | list }}"
+  when:
+    - "'GNOME' in current_desktop.stdout"
+    - item | length > 0
+  become: no
+  # notify: "Reload gnome"
+
+- name: Get the user's D-Bus session address
+  ansible.builtin.shell: |
+    ps aux | grep "dbus-daemon --session" | grep -v grep | awk '{print $2}' | head -n 1 | xargs -I {} cat /proc/{}/environ | tr '\0' '\n' | grep DBUS_SESSION_BUS_ADDRESS | cut -d= -f2-
+  register: dbus_address
+  when: "'GNOME' in current_desktop.stdout"
+  changed_when: false
+  failed_when: false
+
+- name: Load GNOME extension settings from ext-settings.conf
+  ansible.builtin.shell: |
+    export DBUS_SESSION_BUS_ADDRESS="{{ dbus_address.stdout }}"
+    dconf load /org/gnome/shell/extensions/ < {{ playbook_dir }}/../gnome/ext-settings.conf
+  when:
+    - "'GNOME' in current_desktop.stdout"
+    - dbus_address.stdout | length > 0
+  become: no
+
+# - name: "Reload gnome"
+#   command: killall -1 gnome-shell
 # Uncomment and customize these tasks if needed:
 # - name: Install Rust using rustup
 #   ansible.builtin.shell: |
