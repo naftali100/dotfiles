@@ -91,3 +91,4 @@ run_playbook() {
 # Main execution
 install_ansible
 run_playbook
+stow {git,zsh,bash,terminals,tmux,cursors,ssh}
