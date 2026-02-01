@@ -14,14 +14,14 @@ fi
 typeset -A OMZ_PLUGINS_TO_INSTALL=(
   [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
   # [zsh-completions]="https://github.com/zsh-users/zsh-completions"   # -> added below
-  # [zsh-autocomplete]="https://github.com/marlonrichert/zsh-autocomplete"
+  [zsh-autocomplete]="https://github.com/marlonrichert/zsh-autocomplete"
   [ohmyzsh-full-autoupdate]="https://github.com/Pilaton/OhMyZsh-full-autoupdate"
   [you-should-use]="https://github.com/MichaelAquilina/zsh-you-should-use"
   # [colorize]="https://github.com/zpm-zsh/colorize"
   # [uutils-coreutils]="git@github.com:naftali100/uutils-coreutils-plugin.git"
   # [zsh-history-substring-search]="https://github.com/zsh-users/zsh-history-substring-search"
   # [zsh-fzf-history-search]="https://github.com/joshskidmore/zsh-fzf-history-search"
-  [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
+  # [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
   # [zsh-syntax-highlighting]="https://github.com/zsh-users/zsh-syntax-highlighting"
   [fast-syntax-highlighting]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
 )
