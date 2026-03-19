@@ -59,19 +59,8 @@ export LC_ALL=en_US.UTF-8
 #     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # fi
 
-# # nvm setup
-# # export NVM_DIR="$HOME/.nvm"
-# # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# fnm
-FNM_PATH="$HOME/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$PATH:$FNM_PATH"
-  eval "`fnm env`"
-  source <(fnm completions --shell $SHELL_NAME)
-fi
-
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
 
 # mcfly: bash history search tool
 # eval "$(mcfly init $SHELL_NAME)"
