@@ -40,6 +40,18 @@ fi
 #     cargo update
 # fi
 
+# Update npm global packages
+if command -v npm &>/dev/null; then
+    echo "Updating npm global packages..."
+    npm update -g
+fi
+
+# Update pnpm global packages
+if command -v pnpm &>/dev/null; then
+    echo "Updating pnpm global packages..."
+    pnpm update -g
+fi
+
 if command -v nvim &>/dev/null; then
     echo "Updating Vim/Neovim plugins..."
     nvim --headless -c "MasonUpdate" -c "qall"

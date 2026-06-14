@@ -46,9 +46,12 @@ Desktop.ini
 #######
 .env
 .env*
+!.env.example
 
 # Dependencies #
 ################
 node_packages
 .venv
 venv
+
+**/.claude/settings.local.json
