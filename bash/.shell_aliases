@@ -49,9 +49,15 @@ runc(){
 killport () {
     if [ -z "$1" ] ; then
         echo "please specify a port to kill"
-    else
-        fuser -k $1/tcp
+        return 1
     fi
+    local pids
+    pids=$(sudo lsof -ti tcp:"$1")
+    if [ -z "$pids" ]; then
+        echo "nothing listening on port $1"
+        return 0
+    fi
+    sudo kill -9 $pids && echo "killed $pids on port $1"
 }
 
 openWorkSession () {
@@ -200,4 +206,5 @@ alias diff='diff --color=auto'
 # export LESS_TERMCAP_ue=$'\e[0m'
 # export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-alias claude="HEADROOM_TELEMETRY=off headroom wrap claude"
+alias claude="HEADROOM_TELEMETRY=off headroom wrap claude --1m"
+alias codex="HEADROOM_TELEMETRY=off headroom wrap codex"

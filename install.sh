@@ -42,6 +42,11 @@ install_ansible_termux() {
 
 # Detect the platform and install Ansible
 install_ansible() {
+    if command -v ansible &>/dev/null; then
+        echo "Ansible is already installed."
+        return
+    fi
+
     OS="$(uname -s)"
     case "${OS}" in
         Linux*)
@@ -91,4 +96,4 @@ run_playbook() {
 # Main execution
 install_ansible
 run_playbook
-stow {git,zsh,bash,terminals,tmux,cursors,ssh}
+stow {git,zsh,bash,terminals,tmux,cursors,ssh,nvim,cooldown}

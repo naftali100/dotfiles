@@ -136,3 +136,5 @@ if [ -f ~/.private_aliases ]; then
 fi
 
 alias crontab='crontab -i'
+
+export UV_MALWARE_CHECK=1
