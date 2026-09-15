@@ -8,10 +8,10 @@ ser(){
     fi
 }
 
-mkdir(){
-    # use only last param and ignore all other mkdir params
-    /bin/mkdir -pv "${@: -1}" && builtin cd "${@: -1}"
-}
+# mkdir(){
+#     # use only last param and ignore all other mkdir params
+#     /bin/mkdir -pv "${@: -1}" && builtin cd "${@: -1}"
+# }
 
 # create new folder and name it as today date
 # move the files to that folder  
@@ -107,7 +107,6 @@ alias l='exa -la'   # show long listing
 alias ll='exa -Tla' # show tree of all files
 alias ls=l
 
-alias nvm=fnm
 alias upload="scp"
 alias service="systemctl"
 alias sudo="sudo "
@@ -139,11 +138,12 @@ alias nam=man
 
 alias nano="vim"
 
-alias cat="bat"
-alias less="bat"
+# TMP: until ai check possible/standard
+# alias cat="bat"
+# alias less="bat"
 
-alias grep="rg"
-alias find="fd"
+# alias grep="rg"
+# alias find="fd"
 
 alias conf="/usr/bin/git -C $HOME/dotfiles "
 
@@ -206,5 +206,5 @@ alias diff='diff --color=auto'
 # export LESS_TERMCAP_ue=$'\e[0m'
 # export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-alias claude="HEADROOM_TELEMETRY=off headroom wrap claude --1m"
-alias codex="HEADROOM_TELEMETRY=off headroom wrap codex"
+# alias claude="HEADROOM_TELEMETRY=off headroom wrap claude --1m"
+# alias codex="HEADROOM_TELEMETRY=off headroom wrap codex"
