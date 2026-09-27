@@ -60,7 +60,7 @@ export LC_ALL=en_US.UTF-8
 # fi
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+# . "$HOME/.vite-plus/env"
 
 # mcfly: bash history search tool
 # eval "$(mcfly init $SHELL_NAME)"
@@ -140,3 +140,4 @@ alias crontab='crontab -i'
 export UV_MALWARE_CHECK=1
 
 export TELEPORT_USE_LOCAL_SSH_AGENT=false
+export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"

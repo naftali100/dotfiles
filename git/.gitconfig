@@ -1,6 +1,7 @@
 [user]
 	email = 48069590+naftali100@users.noreply.github.com
 	name = naftali
+	signingkey = 445EF6A98A3B07F7!
 [http]
 	postbuffer = 524288000
 [credential]
@@ -41,3 +42,5 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[commit]
+	gpgsign = true
