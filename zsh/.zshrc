@@ -12,6 +12,7 @@ fi
 
 # Declare an associative array: plugin_name => git_repo_url
 typeset -A OMZ_PLUGINS_TO_INSTALL=(
+  [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
   [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
   # [zsh-completions]="https://github.com/zsh-users/zsh-completions"   # -> added below
   # [zsh-autocomplete]="https://github.com/marlonrichert/zsh-autocomplete"
@@ -21,7 +22,6 @@ typeset -A OMZ_PLUGINS_TO_INSTALL=(
   # [uutils-coreutils]="git@github.com:naftali100/uutils-coreutils-plugin.git"
   # [zsh-history-substring-search]="https://github.com/zsh-users/zsh-history-substring-search"
   # [zsh-fzf-history-search]="https://github.com/joshskidmore/zsh-fzf-history-search"
-  # [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
   # [zsh-syntax-highlighting]="https://github.com/zsh-users/zsh-syntax-highlighting"
   [fast-syntax-highlighting]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
 )
@@ -127,7 +127,7 @@ PYTHON_AUTO_VRUN=true
 
 # outside of the plugins normal loading as the readme suggest
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 

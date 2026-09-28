@@ -85,7 +85,12 @@ alias va=openWorkSession
 # Programs aliases
 ##################
 
+alias kubectl="kubecolor"
 alias k="kubectl"
+# fix completion for kubectl when using kubecolor
+compdef kubecolor=kubectl
+compdef k=kubectl
+
 alias watch='watch '
 
 # yt-dlp
